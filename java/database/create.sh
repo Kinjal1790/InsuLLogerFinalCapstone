@@ -1,4 +1,5 @@
 #!/bin/bash
+
 BASEDIR=$(dirname $0)
 DATABASE=insulin_tracker
 psql -U postgres -f "$BASEDIR/dropdb.sql" &&
