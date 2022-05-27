@@ -1,4 +1,7 @@
 #!/bin/bash
+
+export PGPASSWORD='postgres1'
+
 BASEDIR=$(dirname $0)
 DATABASE=insulin_tracker
 psql -U postgres -f "$BASEDIR/dropdb.sql" &&
