@@ -10,6 +10,8 @@ public class User {
 
    private Long id;
    private String username;
+
+   private String email;
    @JsonIgnore
    private String password;
    @JsonIgnore
@@ -18,11 +20,20 @@ public class User {
 
    public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public User(Long id, String username, String email, String password, String authorities) {
       this.id = id;
       this.username = username;
+      this.email = email;
       this.password = password;
       this.activated = true;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
    }
 
    public Long getId() {

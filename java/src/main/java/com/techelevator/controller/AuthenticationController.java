@@ -1,7 +1,11 @@
 package com.techelevator.controller;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
+import com.techelevator.service.EmailSenderService;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,9 @@ import com.techelevator.model.UserAlreadyExistsException;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
+
+
+
 @RestController
 @CrossOrigin
 public class AuthenticationController {
@@ -29,10 +36,13 @@ public class AuthenticationController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
+    private final EmailSenderService senderService;
+
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, EmailSenderService senderService) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
+        this.senderService = senderService;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -54,14 +64,28 @@ public class AuthenticationController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void register(@Valid @RequestBody RegisterUserDTO newUser) {
+    public void register(@Valid @RequestBody RegisterUserDTO newUser) throws MessagingException {
         try {
             User user = userDao.findByUsername(newUser.getUsername());
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
-            userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+            boolean userCreated = userDao.create(newUser.getUsername(), newUser.getEmail(), newUser.getPassword(), newUser.getRole());
+            if(userCreated){
+                triggerMail(newUser.getEmail());
+
+            }
         }
+
+
     }
+
+   // @EventListener(ApplicationReadyEvent.class)
+    public void triggerMail(String toEmail) throws MessagingException {
+        senderService.sendSimpleEmail(toEmail,
+                "This is email body",
+                "This is email subject");
+    }
+
 
     /**
      * Object to return as body in JWT Authentication.
