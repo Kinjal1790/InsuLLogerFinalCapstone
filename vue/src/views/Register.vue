@@ -1,30 +1,43 @@
 <template>
   <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
+    <b-form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      <input
+      <b-form-group for="username" class="sr-only" label='Username:'>
+        <b-form-input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Username"
+          v-model="user.username"
+          required
+          autofocus
+        />
+      </b-form-group>
+      <b-form-group for="email" class="sr-only" label='Email:'>
+        <b-form-input
+          type="email"
+          id="email"
+          class="form-control"
+          placeholder="Email"
+          v-model="user.email"
+          required
+          autofocus
+        />
+      </b-form-group>
+      <b-form-group for="password" class="sr-only" label='Password:'>
+        <b-form-input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required
+        />
+      </b-form-group>
+      <b-form-input
         type="password"
         id="confirmPassword"
         class="form-control"
@@ -33,10 +46,10 @@
         required
       />
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+      <button type="submit">
         Create Account
       </button>
-    </form>
+    </b-form>
   </div>
 </template>
 
@@ -52,6 +65,7 @@ export default {
         password: '',
         confirmPassword: '',
         role: 'user',
+        email: ''
       },
       registrationErrors: false,
       registrationErrorMsg: 'There were problems registering this user.',
@@ -90,4 +104,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+  button {
+    border-radius: 85px;
+  }
+</style>
