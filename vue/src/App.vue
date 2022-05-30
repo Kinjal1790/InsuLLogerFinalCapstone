@@ -6,7 +6,7 @@
     <div id="nav">
       <div class="logo">
         <img src="@/style/Blood_drop_plain.svg.png" alt="logo">
-        <h2>iTracker</h2>
+        <h2 class='company-name'>iTracker</h2>
       </div>
       <nav>
             <router-link v-bind:to="{ name: 'home' }">Home</router-link>

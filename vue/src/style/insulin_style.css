@@ -2,18 +2,20 @@
 :root {
     --i_orange: #fd7459;
     --i_green: #385a64;
-    --i_text_color: #1a2e35;
-    --i_muted_green: rgba(56, 90, 100, 40)
+    --i_text_color: #26414b;
+    --i_muted_green: #385a642f;
 }
 #app {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content:stretch
+    font-family: "Roboto", sans-serif;
+    
 }
 #nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1em 0;
   }
   
@@ -22,6 +24,7 @@
     justify-content: flex-start;
     flex-grow: 1;
     font-family: 'Montserrat Alternates', sans-serif;
+    color: var(--i_green)
   }
   nav {
     display: flex;
@@ -31,16 +34,33 @@
   .logo img {
       max-width: 3em;
   }
+  #login, #register {
+    background-color: var(--i_muted_green);
+    width: 40vw;
+    margin: 1em auto;
+    padding: 2em;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 
+  }
   .form-signin, .form-register {
+      display: flex;
+      flex-direction: column;
       margin: 0 auto;
-      max-width: 60vw;
-      text-align: left;
+      /* width: 50vw;
+      height: 70vh; */
+      
+      align-items: flex-start;
+  }
+  .form-signin > *, .form-register > * {
+    margin: 1em;
+  }
+  .form-signin input, .form-register input{
+      width: 94%
   }
  
   button {
       color: white;
-      font-weight: bold;
+      /* font-weight: bold; */
       background-color: var(--i_orange);
       padding: 1em;
       width: 10em;
@@ -50,10 +70,23 @@
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 85px;
   }
-  nav > * {
+  button:hover {
+      background-color: #da634b;
+  }
+  button:active {
+      background-color: #fa937e;
+  }
+  nav > a {
       color: var(--i_text_color);
   }
   nav > *:hover {
       color: var(--i_green);
+  }
+  h1, h3 {
+    font-family: 'Montserrat Alternates', sans-serif;
+    color: var(--i_text_color)
+  }
+  .company-name {
+      letter-spacing: 15px;
   }
   

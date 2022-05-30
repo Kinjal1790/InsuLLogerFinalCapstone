@@ -1,12 +1,12 @@
 <template>
   <div id="register" class="text-center">
-    <b-form class="form-register" @submit.prevent="register">
+    <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <b-form-group for="username" class="sr-only" label='Username:'>
-        <b-form-input
+      <label for="username" class="sr-only">Username:</label>
+        <input
           type="text"
           id="username"
           class="form-control"
@@ -15,9 +15,9 @@
           required
           autofocus
         />
-      </b-form-group>
-      <b-form-group for="email" class="sr-only" label='Email:'>
-        <b-form-input
+      
+      <label for="email" class="sr-only">Email:</label>
+        <input
           type="email"
           id="email"
           class="form-control"
@@ -26,9 +26,9 @@
           required
           autofocus
         />
-      </b-form-group>
-      <b-form-group for="password" class="sr-only" label='Password:'>
-        <b-form-input
+
+      <label for="password" class="sr-only">Password:</label>
+        <input
           type="password"
           id="password"
           class="form-control"
@@ -36,8 +36,8 @@
           v-model="user.password"
           required
         />
-      </b-form-group>
-      <b-form-input
+        <label for="confirmPassword" class="sr-only">Confirm password:</label>
+      <input
         type="password"
         id="confirmPassword"
         class="form-control"
@@ -49,7 +49,7 @@
       <button type="submit">
         Create Account
       </button>
-    </b-form>
+    </form>
   </div>
 </template>
 
