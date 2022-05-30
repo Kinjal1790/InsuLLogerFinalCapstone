@@ -2,9 +2,9 @@
   <div class="home">
     <div class="home-info">
       <h1>Welcome to iTracker</h1>
-      <h3>Insulin Tracker designed to make your life easier</h3>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quae eveniet tenetur voluptate impedit iusto ipsa blanditiis officiis dolorum numquam porro doloremque culpa recusandae, esse vitae omnis aliquam! Perspiciatis, tempore?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus consequuntur reiciendis commodi iste ipsam aliquam in est, eum libero pariatur dolores alias dolorum facilis, quis accusantium facere eaque perspiciatis officiis sit blanditiis voluptates explicabo! Nulla impedit blanditiis assumenda quo fuga sequi magnam nam voluptatum iure repudiandae odio, dolorum dolor reiciendis?</p>
+      <h3>Tracking your blood sugar levels just got a whole lot easier</h3>
+      <p>iTracker is a multipurpose tool that helps you maintain a healthy lifestyle with diabetes. It helps you monitor your basal blood sugar level and calculate bolus insulin doses so you can focus less on diabetes, and focus more on doing what you love.</p>
+      <p>The longer you use iTracker, the better it becomes. Users who regularly input their carb intake are able to view 3-day, two-week, and month-long reports that show a detailed history of their blood sugar levels and bolus insulin doses. Our warning and alert notifications will let you know when your blood sugar is out of your personal healthy range so you can take action and stay on track. Click on login to create an account and start tracking.</p>
       <button @click='displayModal()' v-if="$store.state.token == ''">Login</button>
       <button v-if="$store.state.token != ''">Input</button>
     </div>
