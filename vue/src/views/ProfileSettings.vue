@@ -2,7 +2,7 @@
   <div id='settings'>
       <header>
           <img class='user-photo' src="../style/user.png" alt="user picture">
-          <h2 class='greeting'>Hello, {{this.$store.state.user.username}}</h2>
+          <h2 class='greeting'>Hello, {{this.$store.state.user.firstName}}</h2>
           <h3>Please provide the following information:</h3>
       </header>
       <form class='settings-form' @submit.prevent='submitProfileSettings'>
@@ -11,23 +11,35 @@
           
           <label for="weight">Weight:</label>
           <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs.)" required autofocus>
-          <!-- <label for="age">Sex:</label>
-          <input type="number" id='sex' class='form-control' placeholder="Sex" required autofocus> -->
           
-          <label for="year-of-diagnosis">Year of diagnosis:</label>
+          <label for="age">Sex:</label>
+          <input type="text" id='sex' v-model='profile.sex' class='form-control' placeholder="Sex" required autofocus>
+          
+          <!-- <label for="year-of-diagnosis">Year of diagnosis:</label> -->
           <!-- diabetes duration affect your metabolism -->
-          <input type="number" id='year-of-diagnosis' v-model='profile.yearOfDiagnosis' class='form-control' placeholder="Year of diagnosis" required autofocus>
+          <!-- <input type="number" id='year-of-diagnosis' v-model='profile.yearOfDiagnosis' class='form-control' placeholder="Year of diagnosis" required autofocus> -->
           <!--Do we let the user chose units of blood sugar (mmol/L or mg/dL-->
-          <!--Which -->
+          <!--Which basal rate should be set hourly(how many units/hour)-->
+
+          <label for="sensitivity-ratio">Insulin type:</label>
+          <input type="text" id='sensitivity-ratio' v-model='profile.insulinType' class='form-control' placeholder="Insulin type" required autofocus>
+          
+          <label for="sensitivity-ratio">Insulin strength:</label>
+          <input type="text" id='sensitivity-ratio' v-model='profile.insulinStrength' class='form-control' placeholder="Insulin strength" required autofocus>
+         
           <label for="basal-rate">Basal rate:</label>
           <input type="number" id='basal-rate' v-modal='profile.basalRate' class='form-control' placeholder="Basal rate" required autofocus>
-          <!--basal rate should be set hourly(how many units/hour)-->
-
+          
           <label for="blood-sugar-target">Blood sugar target:</label>
-          <input type="number" step='0.25' v-model='bloodSugarTarget' id='blood-sugar-target' class='form-control' placeholder="Blood sugar target" required autofocus>
-        
+          <div class="blood-sugar-range">
+                <input type="number" step='0.25' v-model='bloodSugarTargetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
+                <input type="number" step='0.25' v-model='bloodSugarTargetMax' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
+          </div>
+         
           <label for="sensitivity-ratio">Carbs/Insulin Ratio:</label>
-          <input type="number" id='sensitivity-ratio' v-model='sensitivity' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus>
+          <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus>
+          
+          
             <button type="submit">Submit</button>
       </form>
   </div>
@@ -44,10 +56,14 @@ export default {
             profile: {
                 userId: this.$store.state.user.username,
                 yob: '',
+                sex: '',
                 weight: '',
                 yearOfDiagnosis: '',
+                insulinType: '',
+                insulinStrength: '',
                 basalRate: '',
-                bloodSugarTarget: '',
+                bloodSugarTargetMin: '',
+                bloodSugarTargetMax: '',
                 sensitivity: ''
             }
         }
@@ -87,6 +103,18 @@ export default {
     }
     .greeting {
         text-align: center;
+    }
+    button[type=submit] {
+        border-radius: 85px;
+    }
+    .blood-sugar-range {
+        width: 96%;
+        display: flex;
+        /* align-items: space-between; */
+        justify-content: center;
+    }
+    .blood-sugar-range input {
+        margin-right: 10px;
     }
 
 </style>
