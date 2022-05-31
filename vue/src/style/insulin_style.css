@@ -34,7 +34,7 @@
   .logo img {
       max-width: 3em;
   }
-  #login, #register {
+  #login, #register, #settings {
     background-color: var(--i_muted_green);
     width: 40vw;
     margin: 1em auto;
@@ -42,7 +42,7 @@
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
 
   }
-  .form-signin, .form-register {
+  .form-signin, .form-register, .settings-form {
       display: flex;
       flex-direction: column;
       margin: 0 auto;
@@ -51,16 +51,15 @@
       
       align-items: flex-start;
   }
-  .form-signin > *, .form-register > * {
+  .form-signin > *, .form-register > *, .settings-form > * {
     margin: 1em;
   }
-  .form-signin input, .form-register input{
+  .form-signin input, .form-register input, .settings-form input{
       width: 94%
   }
  
   button {
       color: white;
-      /* font-weight: bold; */
       background-color: var(--i_orange);
       padding: 1em;
       width: 10em;
@@ -79,10 +78,10 @@
   nav > a {
       color: var(--i_text_color);
   }
-  nav > *:hover {
+  nav > a:hover {
       color: var(--i_green);
   }
-  h1, h3 {
+  h1, h2, h3 {
     font-family: 'Montserrat Alternates', sans-serif;
     color: var(--i_text_color)
   }

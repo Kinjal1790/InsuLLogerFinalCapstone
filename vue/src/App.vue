@@ -15,7 +15,7 @@
             
             <a  v-if="$store.state.token != ''">Readings</a>
             <a  v-if="$store.state.token != ''">Reports</a>
-            <a  v-if="$store.state.token != ''">Input</a>
+            <router-link v-bind:to='{name: "profile_settings"}'  v-if="$store.state.token != ''">Profile Settings</router-link>
             <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       </nav>
 
