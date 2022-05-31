@@ -5,13 +5,23 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username:</label>
+      <label for="firstName" class="sr-only">First name:</label>
         <input
           type="text"
-          id="username"
+          id="firstName"
           class="form-control"
-          placeholder="Username"
-          v-model="user.username"
+          placeholder="First name"
+          v-model="user.firstName"
+          required
+          autofocus
+        />
+      <label for="lastName" class="sr-only">Last name:</label>
+        <input
+          type="text"
+          id="lastName"
+          class="form-control"
+          placeholder="Last name"
+          v-model="user.lastName"
           required
           autofocus
         />
@@ -61,7 +71,8 @@ export default {
   data() {
     return {
       user: {
-        username: '',
+        firstName: '',
+        lastName: '',
         password: '',
         confirmPassword: '',
         role: 'user',
