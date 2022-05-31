@@ -24,4 +24,45 @@ INSERT INTO users (firstName, lastName, email, password_hash,role) VALUES ('user
 INSERT INTO users (firstName, lastName, email, password_hash,role) VALUES ('admin','admin', 'eric@gmail.com', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 
+CREATE TABLE user_info (
+--                        user_info_id int DEFAULT nextval('seq_user_info_id'::regclass) NOT NULL,
+                       user_info_id SERIAL NOT NULL PRIMARY KEY,
+                       user_id int NOT NULL,
+                       age int NOT NULL,
+                       sex varchar (50) NOT NULL,
+                       weight int NOT NULL,
+                       bolus_insulin_name varchar (50) NOT NULL,
+                       insulin_strength int NOT NULL,
+                       target_min int NOT NULL,
+                       target_max int NOT NULL,
+                       basal_rate int NOT NULL,
+-- --                        CONSTRAINT PK_user_info PRIMARY KEY (user_info_id),
+--                        CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
+CREATE TABLE reading_log (
+--                            reading_log_id int DEFAULT nextval('seq_reading_log_id'::regclass) NOT NULL,
+                           reading_log SERIAL NOT NULL PRIMARY KEY,
+                           user_id int NOT NULL,
+                           carb_intake int NOT NULL,
+                           blood_sugar_reading int NOT NULL,
+                           bolus_dose int NOT NULL,
+                           date_and_time TIMESTAMP NOT NULL,
+--                            CONSTRAINT PK_reading_log PRIMARY KEY (reading_log_id),
+--                            CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+
+ALTER TABLE user_info
+    ADD CONSTRAINT FK_user
+        FOREIGN KEY (user_id)
+            REFERENCES users(user_id);
+
+ALTER TABLE reading_log
+    ADD CONSTRAINT FK_user
+        FOREIGN KEY (user_id)
+            REFERENCES users(user_id);
+
+
 COMMIT TRANSACTION;
