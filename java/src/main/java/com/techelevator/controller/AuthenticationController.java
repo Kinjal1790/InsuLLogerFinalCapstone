@@ -4,8 +4,7 @@ import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 import com.techelevator.service.EmailSenderService;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.techelevator.dao.UserDao;
+import com.techelevator.dao.UserDAO;
 import com.techelevator.model.LoginDTO;
 import com.techelevator.model.RegisterUserDTO;
 import com.techelevator.model.User;
@@ -34,11 +33,11 @@ public class AuthenticationController {
 
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private UserDao userDao;
+    private UserDAO userDao;
 
     private final EmailSenderService senderService;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, EmailSenderService senderService) {
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDAO userDao, EmailSenderService senderService) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
