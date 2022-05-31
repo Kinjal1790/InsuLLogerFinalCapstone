@@ -9,23 +9,27 @@ import java.util.Set;
 public class User {
 
    private Long id;
-   private String username;
+//   private String username;
 
    private String email;
    @JsonIgnore
    private String password;
    @JsonIgnore
    private boolean activated;
+   private String firstName;
+   private String lastName;
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
 
-   public User(Long id, String username, String email, String password, String authorities) {
+   public User(Long id, String firstName, String lastName, String email, String password, String authorities) {
       this.id = id;
-      this.username = username;
+//      this.username = username;
       this.email = email;
       this.password = password;
       this.activated = true;
+      this.firstName = firstName;
+      this.lastName = lastName;
    }
 
    public String getEmail() {
@@ -44,13 +48,28 @@ public class User {
       this.id = id;
    }
 
-   public String getUsername() {
-      return username;
+   public String getFirstName() {
+      return firstName;
    }
 
-   public void setUsername(String username) {
-      this.username = username;
+   public void setFirstName(String firstName) {
+      this.firstName = firstName;
    }
+
+   public String getLastName() {
+      return lastName;
+   }
+
+   public void setLastName(String lastName) {
+      this.lastName = lastName;
+   }
+//   public String getUsername() {
+//      return username;
+//   }
+//
+//   public void setUsername(String username) {
+//      this.username = username;
+//   }
 
    public String getPassword() {
       return password;
@@ -91,21 +110,23 @@ public class User {
       User user = (User) o;
       return id == user.id &&
               activated == user.activated &&
-              Objects.equals(username, user.username) &&
+              Objects.equals(firstName, user.firstName) &&
+              Objects.equals(lastName, user.lastName) &&
+              Objects.equals(email, user.email) &&
               Objects.equals(password, user.password) &&
               Objects.equals(authorities, user.authorities);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, username, password, activated, authorities);
+      return Objects.hash(id, firstName, lastName, email, password, activated, authorities);
    }
 
    @Override
    public String toString() {
       return "User{" +
               "id=" + id +
-              ", username='" + username + '\'' +
+              ", email='" + email + '\'' +
               ", activated=" + activated +
               ", authorities=" + authorities +
               '}';

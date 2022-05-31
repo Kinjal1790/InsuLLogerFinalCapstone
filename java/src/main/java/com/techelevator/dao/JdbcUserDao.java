@@ -23,8 +23,8 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public int findIdByUsername(String username) {
-        return jdbcTemplate.queryForObject("select user_id from users where username = ?", int.class, username);
+    public int findIdByEmail(String email) {
+        return jdbcTemplate.queryForObject("select user_id from users where email = ?", int.class, email);
     }
 
 	@Override
@@ -53,21 +53,21 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) throws UsernameNotFoundException {
+    public User findByEmail(String email) throws UsernameNotFoundException {
         for (User user : this.findAll()) {
-            if( user.getUsername().toLowerCase().equals(username.toLowerCase())) {
+            if( user.getEmail().toLowerCase().equals(email.toLowerCase())) {
                 return user;
             }
         }
-        throw new UsernameNotFoundException("User " + username + " was not found.");
+        throw new UsernameNotFoundException("User " + email + " was not found.");
     }
 
     @Override
-    public boolean create(String username, String email, String password, String role) {
+    public boolean create(String firstName, String lastName, String email, String password, String role) {
         boolean userCreated = false;
 
         // create user
-        String insertUser = "insert into users (username,email, password_hash,role) values(?,?,?,?)";
+        String insertUser = "insert into users (firstName, lastName, email, password_hash,role) values(?,?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = "ROLE_" + role.toUpperCase();
 
@@ -75,10 +75,11 @@ public class JdbcUserDao implements UserDao {
         String id_column = "user_id";
         userCreated = jdbcTemplate.update(con -> {
                     PreparedStatement ps = con.prepareStatement(insertUser, new String[]{id_column});
-                    ps.setString(1, username);
-                    ps.setString(2, email);
-                    ps.setString(3, password_hash);
-                    ps.setString(4, ssRole);
+                    ps.setString(1, firstName);
+                    ps.setString(2, lastName);
+                    ps.setString(3, email);
+                    ps.setString(4, password_hash);
+                    ps.setString(5, ssRole);
                     return ps;
                 }
                 , keyHolder) == 1;
@@ -89,7 +90,9 @@ public class JdbcUserDao implements UserDao {
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getLong("user_id"));
-        user.setUsername(rs.getString("username"));
+        user.setFirstName(rs.getString("firstName"));
+        user.setLastName(rs.getString("lastName"));
+        user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
         user.setActivated(true);

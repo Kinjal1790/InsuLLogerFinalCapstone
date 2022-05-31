@@ -49,13 +49,13 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDTO loginDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication, false);
         
-        User user = userDao.findByUsername(loginDto.getUsername());
+        User user = userDao.findByEmail(loginDto.getEmail());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
@@ -66,10 +66,10 @@ public class AuthenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void register(@Valid @RequestBody RegisterUserDTO newUser) throws MessagingException {
         try {
-            User user = userDao.findByUsername(newUser.getUsername());
+            User user = userDao.findByEmail(newUser.getEmail());
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
-            boolean userCreated = userDao.create(newUser.getUsername(), newUser.getEmail(), newUser.getPassword(), newUser.getRole());
+            boolean userCreated = userDao.create(newUser.getFirstName(), newUser.getLastName(), newUser.getEmail(), newUser.getPassword(), newUser.getRole());
             if(userCreated){
                 triggerMail(newUser.getEmail());
 
@@ -82,8 +82,16 @@ public class AuthenticationController {
    // @EventListener(ApplicationReadyEvent.class)
     public void triggerMail(String toEmail) throws MessagingException {
         senderService.sendSimpleEmail(toEmail,
-                "This is email body",
-                "This is email subject");
+                "Thank you for creating an iTracker account",
+                "Tracking your blood sugar levels and insulin just got a whole lot easier! \n" +
+                        "\n" +
+                        "You registered for an account with iTracker, a multipurpose insulin tracking tool. iTracker helps you monitor your basal blood sugar level, calculate bolus insulin doses, and view detailed summaries of your blood sugar levels so you can focus less on diabetes, and focus more on doing what you love. Visit iTracker today to set up your custom profile. \n" +
+                        "\n" +
+                        "Happy tracking! \n" +
+                        "\n" +
+                        "Sincerely,\n" +
+                        "\n" +
+                        "The iTracker Team\n");
     }
 
 
