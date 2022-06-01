@@ -2,6 +2,7 @@ package com.techelevator.model;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class UserInfoDTO {
@@ -13,7 +14,7 @@ public class UserInfoDTO {
     private int userId;
 
     @NotEmpty
-    private String yob;
+    private LocalDate yob;
     @NotEmpty
     private String sex;
     @NotNull
@@ -34,6 +35,14 @@ public class UserInfoDTO {
 
     @NotNull
     private int carbInsulinRatio;
+
+    public LocalDate getYob() {
+        return yob;
+    }
+
+    public void setYob(LocalDate yob) {
+        this.yob = yob;
+    }
 
     public int getSensitivity() {
         return sensitivity;
@@ -66,12 +75,12 @@ public class UserInfoDTO {
         this.userId = userId;
     }
 
-    public String getYob() {
-        return yob;
-    }
-    public void setYob(String yob) {
-        this.yob = yob;
-    }
+//    public String getYob() {
+//        return yob;
+//    }
+//    public void setYob(String yob) {
+//        this.yob = yob;
+//    }
 
     public String getSex() {
         return sex;

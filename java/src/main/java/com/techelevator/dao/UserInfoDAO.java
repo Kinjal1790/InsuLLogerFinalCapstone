@@ -7,6 +7,5 @@ public interface UserInfoDAO {
     void insertingProfileData(UserInfoDTO userInfodto);
 
 
-
-
+    UserInfoDTO getProfileData(int id);
 }
