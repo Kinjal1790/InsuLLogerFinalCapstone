@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import ProfileSettings from '../views/ProfileSettings.vue'
+import EditSettings from '../views/EditSettings.vue'
 import store from '../store/index'
 
 Vue.use(Router)
@@ -55,9 +56,17 @@ const router = new Router({
       }
     },
     {
-      path: "/profile_settings",
+      path: '/profile_settings',
       name: "profile_settings",
       component: ProfileSettings,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/:id/profile_settings",
+      name: "edit_settings",
+      component: EditSettings,
       meta: {
         requiresAuth: true
       }

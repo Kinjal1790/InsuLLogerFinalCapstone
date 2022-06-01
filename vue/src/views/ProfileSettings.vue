@@ -84,6 +84,7 @@ export default {
             profileService.submitSettings(this.profile).then((r) => {
                 if (r.status == 201) {
                     this.$router.push('/');
+                    this.$store.commit("SET_PROFILE_SETTINGS", this.profile);
                     window.alert('success')
                 }
                 else {
