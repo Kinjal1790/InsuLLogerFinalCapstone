@@ -1,27 +1,28 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 public class UserInfoDTO {
 
 
 //    private int userInfoId;
 
-    @NotEmpty
+    @NotNull
     private int age;
     @NotEmpty
     private String sex;
-    @NotEmpty
+    @NotNull
     private int weight;
     @NotEmpty
     private String bolusInsulinName;
     @NotEmpty
-    private int insulinStrength;
-    @NotEmpty
+    private String insulinStrength;
+    @NotNull
     private int targetMin;
-    @NotEmpty
+    @NotNull
     private int targetMax;
-    @NotEmpty
+    @NotNull
     private int basalRate;
 
 //    public int getUserInfoId() {
@@ -64,11 +65,11 @@ public class UserInfoDTO {
         this.bolusInsulinName = bolusInsulinName;
     }
 
-    public int getInsulinStrength() {
+    public String getInsulinStrength() {
         return insulinStrength;
     }
 
-    public void setInsulinStrength(int insulinStrength) {
+    public void setInsulinStrength(String insulinStrength) {
         this.insulinStrength = insulinStrength;
     }
 

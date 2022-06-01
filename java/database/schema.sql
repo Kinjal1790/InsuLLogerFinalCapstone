@@ -46,7 +46,7 @@ CREATE TABLE user_info (
                        sex varchar (50) NOT NULL,
                        weight int NOT NULL,
                        bolus_insulin_name varchar (50) NOT NULL,
-                       insulin_strength int NOT NULL,
+                       insulin_strength varchar (50) NOT NULL,
                        target_min int NOT NULL,
                        target_max int NOT NULL,
                        basal_rate int NOT NULL,
