@@ -54,7 +54,7 @@
   .form-signin > *, .form-register > *, .settings-form > * {
     margin: 1em;
   }
-  .form-signin input, .form-register input, .settings-form input{
+  .form-signin input, .form-register input, .settings-form #sex, .settings-form input{
       width: 94%
   }
  
