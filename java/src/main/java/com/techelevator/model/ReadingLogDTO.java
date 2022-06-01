@@ -1,22 +1,33 @@
 package com.techelevator.model;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class ReadingLogDTO {
+//    @NotEmpty
+//    private int readingLogId;
+
+    @NotNull
+    private int userId;
     @NotEmpty
-    private int readingLog;
-    @NotEmpty
-    private int carbIntake;
+    private double carbIntake;
     @NotEmpty
     private int bloodSugarReading;
-    @NotEmpty
-    private int bolusDose;
-
 
     @NotEmpty
     private LocalDateTime dataAndTime;
 
+    @NotEmpty
+    private double bolusDose;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public LocalDateTime getDataAndTime() {
         return dataAndTime;
@@ -26,21 +37,15 @@ public class ReadingLogDTO {
         this.dataAndTime = dataAndTime;
     }
 
-    public int getReadingLog() {
-        return readingLog;
-    }
+//    public int getReadingLogId() {
+//        return readingLogId;
+//    }
+//
+//    public void setReadingLogId(int readingLogId) {
+//        this.readingLogId = readingLogId;
+//    }
 
-    public void setReadingLog(int readingLog) {
-        this.readingLog = readingLog;
-    }
 
-    public int getCarbIntake() {
-        return carbIntake;
-    }
-
-    public void setCarbIntake(int carbIntake) {
-        this.carbIntake = carbIntake;
-    }
 
     public int getBloodSugarReading() {
         return bloodSugarReading;
@@ -50,11 +55,19 @@ public class ReadingLogDTO {
         this.bloodSugarReading = bloodSugarReading;
     }
 
-    public int getBolusDose() {
+    public double getCarbIntake() {
+        return carbIntake;
+    }
+
+    public void setCarbIntake(double carbIntake) {
+        this.carbIntake = carbIntake;
+    }
+
+    public double getBolusDose() {
         return bolusDose;
     }
 
-    public void setBolusDose(int bolusDose) {
+    public void setBolusDose(double bolusDose) {
         this.bolusDose = bolusDose;
     }
 }

@@ -18,7 +18,7 @@ public class UserInfoDTO {
     @NotEmpty
     private String sex;
     @NotNull
-    private int weight;
+    private double weight;
     @NotEmpty
     private String bolusInsulinName;
     @NotEmpty
@@ -28,13 +28,13 @@ public class UserInfoDTO {
     @NotNull
     private int targetMax;
     @NotNull
-    private int basalRate;
+    private double basalRate;
 
     @NotNull
-    private int sensitivity;
+    private double sensitivity;
 
     @NotNull
-    private int carbInsulinRatio;
+    private double carbInsulinRatio;
 
     public LocalDate getYob() {
         return yob;
@@ -44,21 +44,7 @@ public class UserInfoDTO {
         this.yob = yob;
     }
 
-    public int getSensitivity() {
-        return sensitivity;
-    }
 
-    public void setSensitivity(int sensitivity) {
-        this.sensitivity = sensitivity;
-    }
-
-    public int getCarbInsulinRatio() {
-        return carbInsulinRatio;
-    }
-
-    public void setCarbInsulinRatio(int carbInsulinRatio) {
-        this.carbInsulinRatio = carbInsulinRatio;
-    }
 //    public int getUserInfoId() {
 //        return userInfoId;
 //    }
@@ -90,13 +76,6 @@ public class UserInfoDTO {
         this.sex = sex;
     }
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
 
     public String getBolusInsulinName() {
         return bolusInsulinName;
@@ -130,11 +109,35 @@ public class UserInfoDTO {
         this.targetMax = targetMax;
     }
 
-    public int getBasalRate() {
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getBasalRate() {
         return basalRate;
     }
 
-    public void setBasalRate(int basalRate) {
+    public void setBasalRate(double basalRate) {
         this.basalRate = basalRate;
+    }
+
+    public double getSensitivity() {
+        return sensitivity;
+    }
+
+    public void setSensitivity(double sensitivity) {
+        this.sensitivity = sensitivity;
+    }
+
+    public double getCarbInsulinRatio() {
+        return carbInsulinRatio;
+    }
+
+    public void setCarbInsulinRatio(double carbInsulinRatio) {
+        this.carbInsulinRatio = carbInsulinRatio;
     }
 }
