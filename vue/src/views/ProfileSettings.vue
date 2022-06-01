@@ -40,9 +40,9 @@
           <label for="basal-rate">Basal rate:</label>
           <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" required autofocus>
          
-          <!-- <label for="sensitivity-ratio">Carbs/Insulin Ratio:</label>
+          <label for="sensitivity-ratio">Sensitivity:</label>
           <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus>
-           -->
+          
           
             <button type="submit">Submit</button>
       </b-form>
@@ -62,7 +62,6 @@ export default {
                 yob: '',
                 sex: '',
                 weight: '',
-                yearOfDiagnosis: '',
                 insulinType: '',
                 insulinStrength: '',
                 basalRate: '',

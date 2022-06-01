@@ -4,7 +4,7 @@ import com.techelevator.model.UserInfoDTO;
 
 public interface UserInfoDAO {
 
-    void insertingProfileData(int userId, UserInfoDTO userInfodto);
+    void insertingProfileData(UserInfoDTO userInfodto);
 
 
 

@@ -7,7 +7,7 @@ public class UserInfoDTO {
 
 
 //    private int userInfoId;
-
+    private int userId;
     @NotNull
     private int age;
     @NotEmpty
@@ -32,6 +32,14 @@ public class UserInfoDTO {
 //    public void setUserInfoId(int userInfoId) {
 //        this.userInfoId = userInfoId;
 //    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public int getAge() {
         return age;

@@ -22,12 +22,12 @@ public class UserProfileController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/profile-settings", method = RequestMethod.POST)
-    public void profileSetUp(Principal principal, @Valid @RequestBody UserInfoDTO userInfoDto) {
+    public void profileSetUp(@Valid @RequestBody UserInfoDTO userInfoDto) {
 
 
-        String email = principal.getName();
-        int userId = userDao.findIdByEmail(email);
-        userInfoDao.insertingProfileData(userId, userInfoDto);
+//        String email = principal.getName();
+//        int userId = userDao.findIdByEmail(email);
+        userInfoDao.insertingProfileData(userInfoDto);
 
     }
 }

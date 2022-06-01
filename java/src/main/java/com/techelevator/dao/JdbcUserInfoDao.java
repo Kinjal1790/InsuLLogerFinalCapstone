@@ -19,12 +19,12 @@ public class JdbcUserInfoDao implements UserInfoDAO{
         this.jdbcTemplate = jdbcTemplate;
     }
     @Override
-    public void insertingProfileData(int userId, UserInfoDTO userInfoDto) {
+    public void insertingProfileData(UserInfoDTO userInfoDto) {
 
         String sql = "INSERT INTO user_info (user_id, age, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate) "
          + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-            jdbcTemplate.update (sql, userId, userInfoDto.getAge(), userInfoDto.getSex(), userInfoDto.getWeight(), userInfoDto.getBolusInsulinName(), userInfoDto.getInsulinStrength(),
+            jdbcTemplate.update (sql, userInfoDto.getUserId(), userInfoDto.getAge(), userInfoDto.getSex(), userInfoDto.getWeight(), userInfoDto.getBolusInsulinName(), userInfoDto.getInsulinStrength(),
                     userInfoDto.getTargetMin(), userInfoDto.getTargetMax(), userInfoDto.getBasalRate());
 
     }
