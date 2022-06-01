@@ -9,13 +9,14 @@
           <label for="age">Date of birth:</label>
           <input type="date" id='age' v-model='profile.yob' class='form-control'  placeholder="Date of birth" required autofocus>
           
-          <label for="weight">Weight (lbs):</label>
-          <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" required autofocus>
-          
-          <!-- <label for="age">Sex:</label>
-          <input type="text" id='sex' v-model='profile.sex' class='form-control' placeholder="Sex" required autofocus> -->
           <label for="sex">Sex:</label>
           <b-form-select id='sex' v-model='profile.sex' :options='sexOptions' class='form-select'></b-form-select>
+          <!-- <label for="age">Sex:</label>
+          <input type="text" id='sex' v-model='profile.sex' class='form-control' placeholder="Sex" required autofocus> -->
+
+          <label for="weight">Weight (lbs):</label>
+          <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" required autofocus>
+        
             
           
           <!-- <label for="year-of-diagnosis">Year of diagnosis:</label> -->
@@ -24,20 +25,20 @@
           <!--Do we let the user chose units of blood sugar (mmol/L or mg/dL-->
           <!--Which basal rate should be set hourly(how many units/hour)-->
 
-          <label for="sensitivity-ratio">Insulin name:</label>
-          <input type="text" id='sensitivity-ratio' v-model='profile.insulinType' class='form-control' placeholder="Insulin name" required autofocus>
+          <label for="insulin-name">Insulin name:</label>
+          <input type="text" id='insulin-name' v-model='profile.insulinType' class='form-control' placeholder="Insulin name" required autofocus>
           
-          <label for="sensitivity-ratio">Insulin strength:</label>
-          <input type="text" id='sensitivity-ratio' v-model='profile.insulinStrength' class='form-control' placeholder="Insulin strength" required autofocus>
+          <label for="insulin-strength">Insulin strength:</label>
+          <input type="text" id='insulin-strength' v-model='profile.insulinStrength' class='form-control' placeholder="Insulin strength" required autofocus>
          
-          <label for="basal-rate">Basal rate:</label>
-          <input type="number" id='basal-rate' v-modal='profile.basalRate' class='form-control' placeholder="Basal rate" required autofocus>
-          
           <label for="blood-sugar-target">Blood sugar target:</label>
           <div class="blood-sugar-range">
                 <input type="number" step='0.25' v-model='profile.bloodSugarTargetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
                 <input type="number" step='0.25' v-model='profile.bloodSugarTargetMax' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
           </div>
+
+          <label for="basal-rate">Basal rate:</label>
+          <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" required autofocus>
          
           <!-- <label for="sensitivity-ratio">Carbs/Insulin Ratio:</label>
           <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus>
