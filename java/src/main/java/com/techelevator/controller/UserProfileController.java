@@ -21,8 +21,6 @@ public class UserProfileController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/profile_settings", method = RequestMethod.POST)
     public void profileSetUp(@Valid @RequestBody UserInfoDTO userInfoDto) {
-//        String email = principal.getName();
-//        int userId = userDao.findIdByEmail(email);
         userInfoDao.insertingProfileData(userInfoDto);
     }
 
@@ -32,13 +30,10 @@ public class UserProfileController {
         return userInfoDao.getProfileData(id);
     }
 
-
-
-
-
-
-
-
-
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path="/{id}/profile_settings/edit", method = RequestMethod.PUT)
+    public void editProfileSettings(@Valid @RequestBody UserInfoDTO userInfoDto, @PathVariable int id) {
+        userInfoDao.editProfileData(userInfoDto, id);
+    }
 
 }

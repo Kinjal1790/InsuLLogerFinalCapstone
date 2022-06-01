@@ -8,4 +8,6 @@ public interface UserInfoDAO {
 
 
     UserInfoDTO getProfileData(int id);
+
+    void editProfileData(UserInfoDTO userInfoDto, int id);
 }
