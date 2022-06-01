@@ -2,14 +2,18 @@ package com.techelevator.model;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 public class UserInfoDTO {
 
 
 //    private int userInfoId;
-    private int userId;
+
     @NotNull
-    private int age;
+    private int userId;
+
+    @NotEmpty
+    private String yob;
     @NotEmpty
     private String sex;
     @NotNull
@@ -25,6 +29,27 @@ public class UserInfoDTO {
     @NotNull
     private int basalRate;
 
+    @NotNull
+    private int sensitivity;
+
+    @NotNull
+    private int carbInsulinRatio;
+
+    public int getSensitivity() {
+        return sensitivity;
+    }
+
+    public void setSensitivity(int sensitivity) {
+        this.sensitivity = sensitivity;
+    }
+
+    public int getCarbInsulinRatio() {
+        return carbInsulinRatio;
+    }
+
+    public void setCarbInsulinRatio(int carbInsulinRatio) {
+        this.carbInsulinRatio = carbInsulinRatio;
+    }
 //    public int getUserInfoId() {
 //        return userInfoId;
 //    }
@@ -41,12 +66,11 @@ public class UserInfoDTO {
         this.userId = userId;
     }
 
-    public int getAge() {
-        return age;
+    public String getYob() {
+        return yob;
     }
-
-    public void setAge(int age) {
-        this.age = age;
+    public void setYob(String yob) {
+        this.yob = yob;
     }
 
     public String getSex() {

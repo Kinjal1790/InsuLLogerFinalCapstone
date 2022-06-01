@@ -5,7 +5,6 @@ import com.techelevator.model.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @RestController
 @CrossOrigin
@@ -21,7 +20,7 @@ public class UserProfileController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/profile-settings", method = RequestMethod.POST)
+    @RequestMapping(value = "/profile_settings", method = RequestMethod.POST)
     public void profileSetUp(@Valid @RequestBody UserInfoDTO userInfoDto) {
 
 

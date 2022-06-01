@@ -42,7 +42,7 @@ CREATE TABLE user_info (
                        user_info_id int DEFAULT nextval('seq_user_info_id'::regclass) NOT NULL,
 --                       user_info_id SERIAL NOT NULL PRIMARY KEY,
                        user_id int NOT NULL,
-                       age int NOT NULL,
+                       yob DATE NOT NULL,
                        sex varchar (50) NOT NULL,
                        weight int NOT NULL,
                        bolus_insulin_name varchar (50) NOT NULL,
@@ -50,6 +50,8 @@ CREATE TABLE user_info (
                        target_min int NOT NULL,
                        target_max int NOT NULL,
                        basal_rate int NOT NULL,
+                       sensitivity int NOT NULL,
+                       carb_insulin_ratio int NOT NULL,
                        CONSTRAINT PK_user_info PRIMARY KEY (user_info_id)
 --                        CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

@@ -26,22 +26,25 @@
           <!--Which basal rate should be set hourly(how many units/hour)-->
 
           <label for="insulin-name">Insulin name:</label>
-          <input type="text" id='insulin-name' v-model='profile.insulinType' class='form-control' placeholder="Insulin name" required autofocus>
+          <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus>
           
           <label for="insulin-strength">Insulin strength:</label>
           <input type="text" id='insulin-strength' v-model='profile.insulinStrength' class='form-control' placeholder="Insulin strength" required autofocus>
          
           <label for="blood-sugar-target">Blood sugar target:</label>
           <div class="blood-sugar-range">
-                <input type="number" step='0.25' v-model='profile.bloodSugarTargetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
-                <input type="number" step='0.25' v-model='profile.bloodSugarTargetMax' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
+                <input type="number" step='0.25' v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
+                <input type="number" step='0.25' v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Max" required autofocus>
           </div>
 
           <label for="basal-rate">Basal rate:</label>
           <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" required autofocus>
          
           <label for="sensitivity-ratio">Sensitivity:</label>
-          <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus>
+          <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="sensitivity" required autofocus>
+
+          <label for="carb-insulin-ratio">Carb-Insulin-Ratio:</label>
+          <input type="number" id='carb-insulin-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus>
           
           
             <button type="submit">Submit</button>
@@ -58,16 +61,17 @@ export default {
     data() {
         return {
             profile: {
-                userId: this.$store.state.user.username,
+                userId: this.$store.state.user.id,
                 yob: '',
                 sex: '',
                 weight: '',
-                insulinType: '',
+                bolusInsulinName: '',
                 insulinStrength: '',
+                targetMin: '',
+                targetMax: '',
                 basalRate: '',
-                bloodSugarTargetMin: '',
-                bloodSugarTargetMax: '',
-                sensitivity: ''
+                sensitivity: '',
+                carbInsulinRatio: ''
             },
             sexOptions: [
                 { value: 'male', text: 'Male' },
