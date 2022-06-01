@@ -46,25 +46,15 @@ public class JdbcUserInfoDao implements UserInfoDAO{
 
         UserInfoDTO userInfoDto = new UserInfoDTO();
         userInfoDto.setUserId(results.getInt("user_id"));
-        System.out.println("*");
         userInfoDto.setYob(results.getDate("yob").toLocalDate());
-        System.out.println("**");
         userInfoDto.setSex(results.getString("sex"));
-        System.out.println("***");
         userInfoDto.setWeight(results.getInt("weight"));
-        System.out.println("****");
         userInfoDto.setBolusInsulinName(results.getString("bolus_insulin_name"));
-        System.out.println("*****");
         userInfoDto.setInsulinStrength(results.getString("insulin_strength"));
-        System.out.println("******");
         userInfoDto.setTargetMin(results.getInt("target_min"));
-        System.out.println("*******");
         userInfoDto.setTargetMax(results.getInt("target_max"));
-        System.out.println("********");
         userInfoDto.setBasalRate(results.getInt("basal_rate"));
-        System.out.println("*********");
         userInfoDto.setSensitivity(results.getInt("sensitivity"));
-        System.out.println("**********");
         userInfoDto.setCarbInsulinRatio(results.getInt("carb_insulin_ratio"));
 
         return userInfoDto;

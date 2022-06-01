@@ -13,7 +13,7 @@ public class UserInfoDTO {
     @NotNull
     private int userId;
 
-    @NotEmpty
+    @NotNull
     private LocalDate yob;
     @NotEmpty
     private String sex;
