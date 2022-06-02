@@ -94,10 +94,21 @@ export default {
           .register(this.user)
           .then((response) => {
             if (response.status == 201) {
-              this.$router.push({
-                path: '/login',
-                query: { registration: 'success' },
-              });
+              //testing
+                authService.login(this.user)
+                  .then(response => {
+                    if (response.status == 200) {
+                      this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+                      this.$store.commit("SET_USER", response.data.user);
+                      this.$router.push("/profile_settings");
+                    }
+                  })
+              //testing
+
+              // this.$router.push({
+              //   path: '/login',
+              //   query: { registration: 'success' },
+              // });
             }
           })
           .catch((error) => {

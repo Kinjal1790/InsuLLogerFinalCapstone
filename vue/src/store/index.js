@@ -20,12 +20,18 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    profileSettings: {}
+    profileSettings: {},
+    initialSubmission: false,
   },
   mutations: {
     SET_PROFILE_SETTINGS(state, profileSettings) {
       state.profileSettings = profileSettings;
+      localStorage.setItem('settings', JSON.stringify(profileSettings))
     },
+    // SET_INITIAL_SUBMISSION(state) {
+    //   state.initialSubmission = true;
+    //   localStorage.setItem('init_sub', true);
+    // },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);

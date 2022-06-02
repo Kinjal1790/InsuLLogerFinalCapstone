@@ -8,6 +8,9 @@ export default {
 
     getSettings(id) {
         return axios.get(`/${id}/profile_settings`)
+    },
+    updateSettings(profile, id) {
+        return axios.put(`/${id}/profile_settings`, profile)
     }
 
 }

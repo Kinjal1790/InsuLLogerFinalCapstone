@@ -31,7 +31,7 @@ public class UserProfileController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path="/{id}/profile_settings/edit", method = RequestMethod.PUT)
+    @RequestMapping(path="/{id}/profile_settings", method = RequestMethod.PUT)
     public void editProfileSettings(@Valid @RequestBody UserInfoDTO userInfoDto, @PathVariable int id) {
         userInfoDao.editProfileData(userInfoDto, id);
     }

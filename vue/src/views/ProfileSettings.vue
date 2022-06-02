@@ -11,19 +11,9 @@
           
           <label for="sex">Sex:</label>
           <b-form-select id='sex' v-model='profile.sex' :options='sexOptions' class='form-select'></b-form-select>
-          <!-- <label for="age">Sex:</label>
-          <input type="text" id='sex' v-model='profile.sex' class='form-control' placeholder="Sex" required autofocus> -->
 
           <label for="weight">Weight (lbs):</label>
           <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" required autofocus>
-        
-            
-          
-          <!-- <label for="year-of-diagnosis">Year of diagnosis:</label> -->
-          <!-- diabetes duration affect your metabolism -->
-          <!-- <input type="number" id='year-of-diagnosis' v-model='profile.yearOfDiagnosis' class='form-control' placeholder="Year of diagnosis" required autofocus> -->
-          <!--Do we let the user chose units of blood sugar (mmol/L or mg/dL-->
-          <!--Which basal rate should be set hourly(how many units/hour)-->
 
           <label for="insulin-name">Insulin name:</label>
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus>
@@ -83,8 +73,10 @@ export default {
         submitProfileSettings() {
             profileService.submitSettings(this.profile).then((r) => {
                 if (r.status == 201) {
-                    this.$router.push('/');
                     this.$store.commit("SET_PROFILE_SETTINGS", this.profile);
+                    // this.$store.commit("SET_INITIAL_SUBMISSION");
+                    this.$router.push('/');
+                    
                     window.alert('success')
                 }
                 else {
@@ -122,7 +114,6 @@ export default {
     .blood-sugar-range {
         width: 96%;
         display: flex;
-        /* align-items: space-between; */
         justify-content: center;
     }
     .blood-sugar-range input {

@@ -18,12 +18,8 @@
 <script>
 export default {
   name: "home",
-  created() {
-    console.log(this.$store.state.profileSettings)
-  },
   methods: {
     displayModal() {
-      console.log(this.$store.state.user.id)
       this.$router.push('/login')
     }
   }

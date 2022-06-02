@@ -10,7 +10,7 @@
           <input type="date" id='age' class='form-control' v-model='profile.yob'  placeholder="Date of birth" required autofocus :disabled='disable'>
           
           <label for="sex">Sex:</label>
-          <b-form-select id='sex'  :options='sexOptions' class='form-select' v-model='profile.sex' disabled></b-form-select>
+          <b-form-select id='sex'  :options='sexOptions' class='form-select' v-model='profile.sex' :disabled='disable'></b-form-select>
 
           <label for="weight">Weight (lbs):</label>
           <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" required autofocus :disabled='disable'>
@@ -33,8 +33,8 @@
           <label for="sensitivity-ratio">Sensitivity:</label>
           <input type="number" id='sensitivity-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" required autofocus :disabled='disable'>
           
-            <button type="submit">Save</button>
-            <button @click.prevent='enableInput()'>Edit</button>
+            <button type="submit" v-if='!disable'>Save</button>
+            <button class='edit-btn' @click.prevent='enableInput()' v-if='disable'>Edit</button>
       </b-form>
   </div>
 </template>
@@ -47,7 +47,7 @@ export default {
         return {
             disable: true,
             profile: {
-                userId: '',
+                userId: this.$store.state.user.id,
                 yob: '',
                 sex: '',
                 weight: '',
@@ -69,7 +69,6 @@ export default {
     created() {
         profileService.getSettings(this.$route.params.id).then(r => {
             this.profile = r.data;
-            console.log(this.profile)
         })
         
     },
@@ -77,8 +76,22 @@ export default {
         enableInput() {
             this.disable = false;
         },
+        submitProfileSettings() {
+            console.log(this.profile)
+            console.log(this.profile.userId)
+            profileService.updateSettings(this.profile, this.profile.userId).then(r => {
+                if (r.status == 200) {
+                    this.$store.commit("SET_PROFILE_SETTINGS", this.profile);
+                    // this.$store.commit("SET_INITIAL_SUBMISSION");
+                    this.$router.push('/');
+                    window.alert('success')
+                }
+                else {
+                    window.alert("===========")
+                }
+            })
+        }
     }
-
 }
 </script>
 
@@ -102,13 +115,13 @@ export default {
     .greeting {
         text-align: center;
     }
-    button[type=submit] {
+    button, .edit-btn {
         border-radius: 85px;
     }
+    
     .blood-sugar-range {
         width: 96%;
         display: flex;
-        /* align-items: space-between; */
         justify-content: center;
     }
     .blood-sugar-range input {
