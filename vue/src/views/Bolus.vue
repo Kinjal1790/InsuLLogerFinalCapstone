@@ -8,8 +8,18 @@
           <input v-model='readings.carbIntake' id='carb-intake' type="number" step="0.01" placeholder="Carbs">
           <label for="bl-sugar-reading">Blood sugar reading (mg/dL):</label>
           <input v-model='readings.bloodSugarReading' id='bl-sugar-reading' type="number" placeholder="Current blood sugar level">
-          
-          <button type="submit">Submit</button>
+          <button type="submit" @click="$bvModal.show('bv-modal-bolus')">Submit</button>
+
+          <b-modal id="bv-modal-bolus" size='lg' centered hide-footer>
+              <template #modal-header="{ }">
+                <h3>Your recommended bolus:</h3>
+            </template>
+              <div class="d-block text-center">
+                  <h3>{{bolus}}</h3>
+              </div>
+              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-bolus')">Okay</b-button>
+          </b-modal>
+
       </form>
   </div>
 </template>
@@ -26,20 +36,23 @@ export default {
                 carbIntake: '',
                 bloodSugarReading: ''
             },
-            bolus: ''
+            bolus: '5.5'
         }
     },
     methods: {
         getBolus() {
-            var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            var dateTime = date+' '+time;
+            let today = new Date();
+            let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            let dateTime = date+' '+ time;
             this.readings.dataAndTime = dateTime;
             console.log(this.readings);
             bolusService.sendReadings(this.readings).then((r) => {
                 if (r.status == 201) {
                     window.alert('success');
+                }
+                else {
+                    window.alert(r.status)
                 }
             })
         }
