@@ -13,7 +13,7 @@
             <a v-if="$store.state.token == ''">About</a>
             <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
             
-            <a  v-if="$store.state.token != ''">Readings</a>
+            <router-link v-bind:to="{name: 'bolus'}" v-if="$store.state.token != ''">Input?</router-link>
             <a  v-if="$store.state.token != ''">Reports</a>
             <!-- <router-link v-bind:to='{name: "profile_settings"}'  v-if="$store.state.token != '' && !$store.state.profileSettings.userId">Profile Settings</router-link> -->
             <router-link v-bind:to="{name: 'edit_settings', params: {id: $store.state.user.id}}"  v-if="$store.state.token != ''">Profile Settings</router-link>

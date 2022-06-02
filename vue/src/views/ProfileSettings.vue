@@ -18,13 +18,13 @@
           <label for="insulin-name">Insulin name:</label>
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus>
           
-          <label for="insulin-strength">Insulin strength:</label>
-          <input type="text" id='insulin-strength' v-model='profile.insulinStrength' class='form-control' placeholder="Insulin strength" required autofocus>
+           <label for="sex">Insulin strength:</label>
+          <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength' :disabled='disable'></b-form-select>
          
-          <label for="blood-sugar-target">Blood sugar target:</label>
+          <label for="blood-sugar-target">Blood sugar target (mg/dL):</label>
           <div class="blood-sugar-range">
-                <input type="number" step='0.01' v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus>
-                <input type="number" step='0.01' v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Max" required autofocus>
+                <input type="number" v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min (mg/dL)" required autofocus>
+                <input type="number" v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Max (mg/dL)" required autofocus>
           </div>
 
           <label for="basal-rate">Basal rate:</label>
@@ -66,6 +66,11 @@ export default {
             sexOptions: [
                 { value: 'male', text: 'Male' },
                 { value: 'female', text: 'Female' },
+            ],
+            strengthOptions: [
+                { value: 'u-100', text: 'U-100'},
+                { value: 'u-300', text: 'U-300'},
+                { value: 'u-500', text: 'U-500'},
             ]
         }
     },
