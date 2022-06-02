@@ -18,6 +18,20 @@
                   <h3>{{bolus}}</h3>
               </div>
               <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-bolus')">Okay</b-button>
+              <template #modal-footer="{ ok, cancel, hide }">
+                <b>Custom Footer</b>
+                <!-- Emulate built in modal footer ok and cancel button actions -->
+                <b-button size="sm" variant="success" @click="ok()">
+                    OK
+                </b-button>
+                <b-button size="sm" variant="danger" @click="cancel()">
+                    Cancel
+                </b-button>
+                <!-- Button with custom close trigger value -->
+                <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
+                    Forget it
+                </b-button>
+                </template>
           </b-modal>
 
       </form>
@@ -49,6 +63,7 @@ export default {
             console.log(this.readings);
             bolusService.sendReadings(this.readings).then((r) => {
                 if (r.status == 201) {
+                    console.log(r.data)
                     window.alert('success');
                 }
                 else {
