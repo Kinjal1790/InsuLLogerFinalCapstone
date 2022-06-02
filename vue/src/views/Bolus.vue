@@ -3,15 +3,14 @@
        <div class="side-img">
       <img src="../style/carbs.jpg" alt="a woman measuring her blood sugar level">
     </div>
-    <div class="bolus-form">
-      <form>
+      <form class="bolus-form">
+          <label for="carb-intake">Carb intake:</label>
+          <input id='carb-intake' type="number" step="0.01">
+          <label for="bl-sugar-reading">Blood sugar reading:</label>
+          <input id='bl-sugar-reading' type="number" step="0.01">
           
-          <input type="text">
-          <input type="text">
-          <input type="text">
           <button type="submit">Submit</button>
       </form>
-    </div>
   </div>
 </template>
 
@@ -28,10 +27,12 @@ export default {
         grid-template-columns: 50% 50%;
     }
     .bolus-form {
+        margin-left: 2em;
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 1em;
+        justify-content: center;
     }
     button {
         border-radius: 85px;

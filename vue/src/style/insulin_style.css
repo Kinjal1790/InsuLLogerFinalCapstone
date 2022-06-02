@@ -22,6 +22,7 @@
 .logo {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
     flex-grow: 1;
     font-family: 'Montserrat Alternates', sans-serif;
     color: var(--i_green)
