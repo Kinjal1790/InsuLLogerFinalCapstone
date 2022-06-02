@@ -20,7 +20,7 @@ public class ReadingLogController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/bolus", method = RequestMethod.POST)
     public void readingLogInput(@Valid @RequestBody ReadingLogDTO readingLogDto) {
         Integer readingLogId = readingLogDao.insertingReadingLogData(readingLogDto);
 //        calculatedBolus(readingLogId);
