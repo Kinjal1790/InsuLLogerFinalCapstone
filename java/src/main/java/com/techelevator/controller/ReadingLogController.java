@@ -1,10 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.ReadingLogDAO;
-import com.techelevator.dao.UserDAO;
-import com.techelevator.model.Bolus;
 import com.techelevator.model.ReadingLogDTO;
-import com.techelevator.model.UserInfoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +21,9 @@ public class ReadingLogController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/bolus", method = RequestMethod.POST)
-    public Bolus getBolus(@Valid @RequestBody ReadingLogDTO readingLogDto) {
-        int readingLogId = readingLogDao.insertingReadingLogData(readingLogDto);
-        return readingLogDao.calculateBolus(readingLogId);
+    public Double getBolus(@Valid @RequestBody ReadingLogDTO readingLogDto) {
+        readingLogDao.insertingReadingLogData(readingLogDto);
+        return readingLogDao.calculateBolus(readingLogDto);
 
     }
 

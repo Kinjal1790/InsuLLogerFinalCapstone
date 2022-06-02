@@ -1,8 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.Bolus;
 import com.techelevator.model.ReadingLogDTO;
-import com.techelevator.model.UserInfoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -24,18 +22,48 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
     }
 
     @Override
-    public int insertingReadingLogData(ReadingLogDTO readingLogDto) {
+    public void insertingReadingLogData(ReadingLogDTO readingLogDto) {
 
         String sql = "INSERT INTO reading_log (user_id, carb_intake, blood_sugar_reading, date_and_time)"
-                + "VALUES (?, ?, ?, ?) RETURNING reading_log_id;";
+                + "VALUES (?, ?, ?, ?)";
 
-       Integer readingLogId = jdbcTemplate.queryForObject(sql, Integer.class, readingLogDto.getUserId(),
+       jdbcTemplate.update(sql, readingLogDto.getUserId(),
                 readingLogDto.getCarbIntake(),
                 readingLogDto.getBloodSugarReading(),
                 readingLogDto.getDataAndTime());
 
-       return readingLogId;
+
     }
+
+    @Override
+    public Double calculateBolus(ReadingLogDTO readingLogDto)
+    {
+        Double bolus = 0.0;
+        String sql = "SELECT target_max, sensitivity, carb_insulin_ratio from user_info\n" +
+                "where user_id = ?;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, readingLogDto.getUserId());
+
+        if(result.next()){
+            double targetMax = result.getDouble("target_max");
+            double sensitivity = result.getDouble("sensitivity");
+            double carbInsulinRatio = result.getDouble("carb_insulin_ratio");
+            bolus = runBolusCalculation(targetMax, sensitivity, carbInsulinRatio, readingLogDto.getCarbIntake(), readingLogDto.getBloodSugarReading());
+        }
+
+        return bolus;
+    }
+
+    private double runBolusCalculation(double targetMax, double sensitivity, double carbInsulinRatio, double carbIntake, double bloodSugarReading){
+
+        return ((carbIntake/carbInsulinRatio) + ((bloodSugarReading - targetMax)/sensitivity));
+    }
+
+
+
+
+
+
 
     @Override
     public List<ReadingLogDTO> getAllReadingLogs(int id) {
@@ -49,17 +77,6 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
             readingLogs.add(readingLog);
         }
         return readingLogs;
-    }
-
-    @Override
-    public Bolus calculateBolus(int id)
-    {
-        Bolus bolus = new Bolus();
-
-        String sql = "SELECT r.carb_intake, u.whatever FROM reading_log r JOIN user_info u ON r.user_id = u.user_id";
-//        double carbIntake = .getDouble ("r.carb_intake");
-
-        return bolus;
     }
 
 
