@@ -30,6 +30,7 @@ public class ReadingLogController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(path="/reading_log/{id}", method = RequestMethod.GET)
     public List<ReadingLogDTO> getAllReadingLogs(@PathVariable int id) {
+
         return readingLogDao.getAllReadingLogs(id);
     }
 

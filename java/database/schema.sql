@@ -70,7 +70,8 @@ CREATE TABLE reading_log (
                            user_id int NOT NULL,
                            carb_intake DECIMAL(4,2) NOT NULL,
                            blood_sugar_reading int NOT NULL,
-                           date_and_time varchar(50) NOT NULL,
+--                         date_and_time VARCHAR(50) NOT NULL,
+                           date_and_time TIMESTAMP NOT NULL,
                            CONSTRAINT PK_reading_log PRIMARY KEY (reading_log_id)
 --                            CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );

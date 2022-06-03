@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,14 +25,16 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
     @Override
     public void insertingReadingLogData(ReadingLogDTO readingLogDto) {
 
+        Timestamp dateTime = Timestamp.valueOf(readingLogDto.getDataAndTime());
+
         String sql = "INSERT INTO reading_log (user_id, carb_intake, blood_sugar_reading, date_and_time)"
                 + "VALUES (?, ?, ?, ?)";
 
        jdbcTemplate.update(sql, readingLogDto.getUserId(),
                 readingLogDto.getCarbIntake(),
                 readingLogDto.getBloodSugarReading(),
-                readingLogDto.getDataAndTime());
-
+//               readingLogDto.getDataAndTime());
+               dateTime);
 
     }
 
@@ -68,8 +71,11 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
     @Override
     public List<ReadingLogDTO> getAllReadingLogs(int id) {
         List<ReadingLogDTO> readingLogs = new ArrayList<>();
-        String sql = "SELECT carb_intake, blood_sugar_reading, date_and_time " +
-                "FROM reading_log WHERE user_id = ?";
+
+//        String sql = "SELECT carb_intake, blood_sugar_reading, date_and_time " +
+//                "FROM reading_log WHERE user_id = ?";
+
+        String sql = "SELECT * FROM reading_log WHERE user_id = ?";
 
         SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
@@ -86,7 +92,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         readingLogDTO.setUserId(results.getInt("user_id"));
         readingLogDTO.setCarbIntake(results.getDouble("carb_intake"));
         readingLogDTO.setBloodSugarReading(results.getInt("blood_sugar_reading"));
-        readingLogDTO.setDataAndTime(results.getString("date_and_time"));
+//      readingLogDTO.setDataAndTime(results.getString("date_and_time"));
+        readingLogDTO.setDataAndTime(results.getTimestamp("date_and_time").toString());
 
         return readingLogDTO;
     }

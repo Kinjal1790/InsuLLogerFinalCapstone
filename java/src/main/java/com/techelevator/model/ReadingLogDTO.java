@@ -2,12 +2,9 @@ package com.techelevator.model;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Timestamp;
 
 public class ReadingLogDTO {
-//    @NotEmpty
-//    private int readingLogId;
 
     @NotNull
     private int userId;
@@ -18,9 +15,6 @@ public class ReadingLogDTO {
 
     @NotEmpty
     private String dataAndTime;
-
-//    @NotEmpty
-//    private double bolusDose;
 
     public int getUserId() {
         return userId;
@@ -37,16 +31,6 @@ public class ReadingLogDTO {
     public void setDataAndTime(String dataAndTime) {
         this.dataAndTime = dataAndTime;
     }
-
-//    DateTimeFormatter format =
-//    public int getReadingLogId() {
-//        return readingLogId;
-//    }
-//
-//    public void setReadingLogId(int readingLogId) {
-//        this.readingLogId = readingLogId;
-//    }
-
 
 
     public int getBloodSugarReading() {
@@ -65,11 +49,5 @@ public class ReadingLogDTO {
         this.carbIntake = carbIntake;
     }
 
-//    public double getBolusDose() {
-//        return bolusDose;
-//    }
-//
-//    public void setBolusDose(double bolusDose) {
-//        this.bolusDose = bolusDose;
-//    }
+
 }
