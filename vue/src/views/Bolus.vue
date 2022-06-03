@@ -10,26 +10,17 @@
           <input v-model='readings.bloodSugarReading' id='bl-sugar-reading' type="number" placeholder="Current blood sugar level">
           <button type="submit" @click="$bvModal.show('bv-modal-bolus')">Submit</button>
 
-          <b-modal id="bv-modal-bolus" size='lg' centered hide-footer>
+          <b-modal id="bv-modal-bolus" size='lg' centered >
               <template #modal-header="{ }">
                 <h3>Your recommended bolus:</h3>
             </template>
               <div class="d-block text-center">
                   <h3>{{bolus}}</h3>
               </div>
-              <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-bolus')">Okay</b-button>
-              <template #modal-footer="{ ok, cancel, hide }">
-                <b>Custom Footer</b>
-                <!-- Emulate built in modal footer ok and cancel button actions -->
-                <b-button size="sm" variant="success" @click="ok()">
+              <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-bolus')">Okay</b-button> -->
+              <template #modal-footer="{ ok }">
+                <b-button id='modal-btn' variant="success" @click="ok()">
                     OK
-                </b-button>
-                <b-button size="sm" variant="danger" @click="cancel()">
-                    Cancel
-                </b-button>
-                <!-- Button with custom close trigger value -->
-                <b-button size="sm" variant="outline-secondary" @click="hide('forget')">
-                    Forget it
                 </b-button>
                 </template>
           </b-modal>
@@ -50,7 +41,7 @@ export default {
                 carbIntake: '',
                 bloodSugarReading: ''
             },
-            bolus: '5.5'
+            bolus: ''
         }
     },
     methods: {
@@ -63,11 +54,10 @@ export default {
             console.log(this.readings);
             bolusService.sendReadings(this.readings).then((r) => {
                 if (r.status == 201) {
-                    console.log(r.data)
-                    window.alert('success');
+                    this.bolus = r.data.toFixed(2)
                 }
                 else {
-                    window.alert(r.status)
+                    console.log(r.status)
                 }
             })
         }
@@ -89,7 +79,7 @@ export default {
         gap: 1em;
         justify-content: center;
     }
-    button {
+    button, #modal-btn {
         border-radius: 85px;
     }
     .side-img {

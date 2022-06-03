@@ -19,7 +19,7 @@
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus>
           
            <label for="sex">Insulin strength:</label>
-          <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength' :disabled='disable'></b-form-select>
+          <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength'></b-form-select>
          
           <label for="blood-sugar-target">Blood sugar target (mg/dL):</label>
           <div class="blood-sugar-range">

@@ -46,11 +46,13 @@
   .form-signin, .form-register, .settings-form {
       display: flex;
       flex-direction: column;
-      margin: 0 auto;
+      /* margin: 0 auto; */
       /* width: 50vw;
-      height: 70vh; */
+      height: 70vh;*/
       
       align-items: flex-start;
+      /* display: grid;
+      grid-template-columns: 1fr 1fr; */
   }
   .form-signin > *, .form-register > *, .settings-form > * {
     margin: 1em;
@@ -59,7 +61,7 @@
       width: 94%
   }
  
-  button {
+  button, #modal-btn {
       color: white;
       background-color: var(--i_orange);
       padding: 1em;

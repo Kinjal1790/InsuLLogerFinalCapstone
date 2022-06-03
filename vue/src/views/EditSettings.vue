@@ -17,9 +17,6 @@
 
           <label for="insulin-name">Insulin name:</label>
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus :disabled='disable'>
-          
-          <!-- <label for="insulin-strength">Insulin strength:</label>
-          <input type="text" id='insulin-strength' v-model='profile.insulinStrength' class='form-control' placeholder="Insulin strength" required autofocus :disabled='disable'> -->
          
           <label for="insulin-strength">Insulin strength:</label>
           <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength' :disabled='disable'></b-form-select>
@@ -34,14 +31,26 @@
           <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" step="0.01" required autofocus :disabled='disable'>
          
           <label for="sensitivity-ratio">Sensitivity:</label>
-          <input type="number" id='sensitivity-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" step="0.01" required autofocus :disabled='disable'>
+          <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Sensitivity" step="0.01" required autofocus :disabled='disable'>
           
           <label for="carb-insulin-ratio">Carb-Insulin-Ratio:</label>
           <input type="number" id='carb-insulin-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" step="0.01" required autofocus :disabled='disable'>
             
-            <button type="submit" v-if='!disable'>Save</button>
-            <button class='edit-btn' @click.prevent='enableInput()' v-if='disable'>Edit</button>
+          <button type="submit" v-if='!disable'>Save</button>
+          <button class='edit-btn' @click.prevent='enableInput()' v-if='disable'>Edit</button>
       </b-form>
+
+       <b-modal id="bv-modal-edit" size='lg' centered hide-header>
+              <div class="d-block text-center">
+                  <h3>Your changes were successfully saved!</h3>
+              </div>
+              <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-bolus')">Okay</b-button> -->
+              <template #modal-footer="{ ok }">
+                    <b-button id='modal-btn' variant="success" @click="ok()">
+                        OK
+                    </b-button>
+               </template>
+          </b-modal>
   </div>
 </template>
 
@@ -93,13 +102,14 @@ export default {
             profileService.updateSettings(this.profile, this.profile.userId).then(r => {
                 if (r.status == 200) {
                     this.$store.commit("SET_PROFILE_SETTINGS", this.profile);
-                    // this.$store.commit("SET_INITIAL_SUBMISSION");
-                    this.$router.push('/');
-                    window.alert('success')
+                    this.$bvModal.show('bv-modal-edit')
+                    this.disable = true;
+                    
                 }
                 else {
                     window.alert("===========")
                 }
+                // this.$router.push('/');
             })
         }
     }
