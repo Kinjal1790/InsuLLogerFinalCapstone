@@ -16,6 +16,26 @@ public class ReadingLogDTO {
     @NotEmpty
     private String dataAndTime;
 
+
+    private String warning;
+    private String alert;
+
+    public String getWarning() {
+        return warning;
+    }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
+
+    public String getAlert() {
+        return alert;
+    }
+
+    public void setAlert(String alert) {
+        this.alert = alert;
+    }
+
     public int getUserId() {
         return userId;
     }

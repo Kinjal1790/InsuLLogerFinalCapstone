@@ -1,10 +1,13 @@
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS bolus_log;
 DROP TABLE IF EXISTS user_info_reading_log;
 DROP TABLE IF EXISTS reading_log;
 DROP TABLE IF EXISTS user_info;
 DROP TABLE IF EXISTS users;
 
+
+DROP SEQUENCE IF EXISTS seq_bolus_log_id;
 DROP SEQUENCE IF EXISTS seq_ui_rl_id;
 DROP SEQUENCE IF EXISTS seq_reading_log_id;
 DROP SEQUENCE IF EXISTS seq_user_info_id;
@@ -34,6 +37,12 @@ CREATE SEQUENCE seq_ui_rl_id
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
+
+CREATE SEQUENCE seq_bolus_log_id
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
 CREATE TABLE users (
@@ -72,6 +81,8 @@ CREATE TABLE reading_log (
                            blood_sugar_reading int NOT NULL,
 --                         date_and_time VARCHAR(50) NOT NULL,
                            date_and_time TIMESTAMP NOT NULL,
+                           warning VARCHAR(50),
+                           alert VARCHAR(50),
                            CONSTRAINT PK_reading_log PRIMARY KEY (reading_log_id)
 --                            CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
@@ -82,6 +93,14 @@ CREATE TABLE user_info_reading_log (
                         reading_log_id int NOT NULL,
                         CONSTRAINT PK_user_info_reading_log PRIMARY KEY (ui_rl_id)
 );
+
+CREATE TABLE bolus_log (
+                        bolus_log_id int DEFAULT nextval('seq_bolus_log_id'::regclass) NOT NULL,
+                        reading_log_id int NOT NULL,
+                        bolus_dose DECIMAL NOT NULL,
+                        CONSTRAINT PK_bolus_log PRIMARY KEY (bolus_log_id)
+);
+
 
 
 
@@ -107,6 +126,11 @@ FOREIGN KEY (user_info_id)
  ADD CONSTRAINT FK_reading_log
  FOREIGN KEY (reading_log_id)
      REFERENCES reading_log(reading_log_id);
+
+ALTER TABLE bolus_log
+    ADD CONSTRAINT FK_reading_log
+        FOREIGN KEY (reading_log_id)
+            REFERENCES reading_log(reading_log_id);
 
 
 

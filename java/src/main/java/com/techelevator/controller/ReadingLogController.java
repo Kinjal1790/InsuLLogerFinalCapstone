@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.ReadingLogDAO;
+import com.techelevator.model.ActivityDTO;
 import com.techelevator.model.ReadingLogDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,16 +23,15 @@ public class ReadingLogController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/bolus", method = RequestMethod.POST)
     public Double getBolus(@Valid @RequestBody ReadingLogDTO readingLogDto) {
-        readingLogDao.insertingReadingLogData(readingLogDto);
-        return readingLogDao.calculateBolus(readingLogDto);
+        Integer readingLogId = readingLogDao.insertingReadingLogData(readingLogDto);
+        return readingLogDao.calculateBolus(readingLogDto, readingLogId);
 
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(path="/reading_log/{id}", method = RequestMethod.GET)
-    public List<ReadingLogDTO> getAllReadingLogs(@PathVariable int id) {
-
-        return readingLogDao.getAllReadingLogs(id);
+    @RequestMapping(path="/{id}/activity", method = RequestMethod.GET)
+    public List<ActivityDTO> getAllActivity(@PathVariable int id) {
+        return readingLogDao.getAllActivityLogs(id);
     }
 
 
