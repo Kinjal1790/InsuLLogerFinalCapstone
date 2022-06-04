@@ -18,6 +18,15 @@ public class ReportFilterDataDTO {
         return dateTo;
     }
 
+    @Override
+    public String toString() {
+        return "ReportFilterDataDTO{" +
+                "dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", filter=" + filter +
+                '}';
+    }
+
     public void setDateTo(String dateTo) {
         this.dateTo = dateTo;
     }

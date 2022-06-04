@@ -5,22 +5,51 @@ import java.time.LocalDateTime;
 
 public class ReportDTO {
 
-    private LocalDateTime dateAndTime;
+    private LocalDate dateAndTime;
     private int bloodSugarReading;
     private double bolusDose;
     private int targetMin;
     private int targetMax;
+    private LocalDate dateFrom;
+    private LocalDate dateTo;
 
-    public LocalDateTime getDateAndTime() {
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
+    }
+
+    public LocalDate getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(LocalDateTime dateAndTime) {
+    public void setDateAndTime(LocalDate dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 
     public int getBloodSugarReading() {
         return bloodSugarReading;
+    }
+
+    @Override
+    public String toString() {
+        return "ReportDTO{" +
+                "dateAndTime=" + dateAndTime +
+                ", bloodSugarReading=" + bloodSugarReading +
+                ", bolusDose=" + bolusDose +
+                ", targetMin=" + targetMin +
+                ", targetMax=" + targetMax +
+                '}';
     }
 
     public void setBloodSugarReading(int bloodSugarReading) {
