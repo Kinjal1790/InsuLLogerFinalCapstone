@@ -93,7 +93,7 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
                 " on r.reading_log_id = b.reading_log_id " +
                 " where r.user_id = ?;";
 
-        SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, id);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
             ActivityDTO activityLog = activityLogMap(results);
             activityLogs.add(activityLog);
