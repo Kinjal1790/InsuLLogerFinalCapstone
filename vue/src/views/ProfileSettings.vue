@@ -6,7 +6,7 @@
           <h3>Please provide the following information:</h3>
       </header>
       <b-form class='settings-form' @submit.prevent='submitProfileSettings'>
-          <label for="age">Date of birth:</label>
+          <label for="age">Date of Birth:</label>
           <input type="date" id='age' v-model='profile.yob' class='form-control'  placeholder="Date of birth" required autofocus>
           
           <label for="sex">Sex:</label>
@@ -15,19 +15,19 @@
           <label for="weight">Weight (lbs):</label>
           <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" step="0.01" required autofocus>
 
-          <label for="insulin-name">Insulin name:</label>
+          <label for="insulin-name">Insulin Name:</label>
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus>
           
-           <label for="sex">Insulin strength:</label>
+           <label for="sex">Insulin Strength:</label>
           <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength'></b-form-select>
          
-          <label for="blood-sugar-target">Blood sugar target (mg/dL):</label>
+          <label for="blood-sugar-target">Blood Sugar Target (mg/dL):</label>
           <div class="blood-sugar-range">
                 <input type="number" v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min (mg/dL)" required autofocus>
                 <input type="number" v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Max (mg/dL)" required autofocus>
           </div>
 
-          <label for="basal-rate">Basal rate:</label>
+          <label for="basal-rate">Basal Rate:</label>
           <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" step="0.01" required autofocus>
          
           <label for="sensitivity-ratio">Sensitivity:</label>
