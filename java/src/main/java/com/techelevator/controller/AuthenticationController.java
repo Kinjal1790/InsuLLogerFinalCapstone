@@ -81,16 +81,22 @@ public class AuthenticationController {
    // @EventListener(ApplicationReadyEvent.class)
     public void triggerMail(String toEmail) throws MessagingException {
         senderService.sendSimpleEmail(toEmail,
-                "Thank you for creating an iTracker account",
+                "Thank you for creating an InsuLogger account",
                 "Tracking your blood sugar levels and insulin just got a whole lot easier! \n" +
                         "\n" +
-                        "You registered for an account with iTracker, a multipurpose insulin tracking tool. iTracker helps you monitor your basal blood sugar level, calculate bolus insulin doses, and view detailed summaries of your blood sugar levels so you can focus less on diabetes, and focus more on doing what you love. Visit iTracker today to set up your custom profile. \n" +
+                        "You registered for an account with InsuLogger, a multipurpose insulin tracking tool. With InsuLogger’s easy-to-use features, you can:\n" +
+                        "Monitor your basal blood sugar level\n" +
+                        "Calculate bolus insulin doses\n" +
+                        "View detailed reports and averages of your blood sugar levels and insulin bolus doses\n" +
+                        "\n" +
+                        " Visit InsuLogger to finish setting up your custom profile.\n" +
                         "\n" +
                         "Happy tracking! \n" +
                         "\n" +
                         "Sincerely,\n" +
                         "\n" +
-                        "The iTracker Team\n");
+                        "The InsuLogger Team\n" +
+                        "\n");
     }
 
 

@@ -3,8 +3,9 @@
     <div class="home-info">
       <h1>Welcome to iTracker</h1>
       <h3>Tracking your blood sugar levels just got a whole lot easier</h3>
-      <p>iTracker is a multipurpose tool that helps you maintain a healthy lifestyle with diabetes. It helps you monitor your basal blood sugar level and calculate bolus insulin doses so you can focus less on diabetes, and focus more on doing what you love.</p>
-      <p>The longer you use iTracker, the better it becomes. Users who regularly input their carb intake are able to view 3-day, two-week, and month-long reports that show a detailed history of their blood sugar levels and bolus insulin doses. Our warning and alert notifications will let you know when your blood sugar is out of your personal healthy range so you can take action and stay on track. Click on login to create an account and start tracking.</p>
+      <p>InsuLoggerr is a multipurpose tool that helps you maintain a healthy lifestyle with diabetes. 
+        With InsuLogger’s easy-to-use features, you can monitor your basal blood sugar level and calculate bolus insulin doses so you can worry less about your blood sugar, and focus more on doing what you love. </p>
+      <p>The longer you use InsuLogger, the better it becomes. Users who regularly input their carbohydrate (carb) intake are able to view 3-day, two-week, and monthly reports that show averages of their  blood sugar and bolus insulin doses compared to target ranges. Our warning and alert notifications will let you know when your blood sugar is out of healthy range so you can take action and stay on track. Click on the login page to create an account and start tracking!</p>
       <button @click='displayLogin()' v-if="$store.state.token == ''">Login</button>
       <button v-if="$store.state.token != ''" @click='$router.push("/bolus")'>Input</button>
     </div>
