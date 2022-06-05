@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.ReadingLogDAO;
 import com.techelevator.model.ActivityDTO;
+import com.techelevator.model.AlertInfoDTO;
 import com.techelevator.model.ReadingLogDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class ReadingLogController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/bolus", method = RequestMethod.POST)
-    public Double getBolus(@Valid @RequestBody ReadingLogDTO readingLogDto) {
+    public AlertInfoDTO getBolus(@Valid @RequestBody ReadingLogDTO readingLogDto) {
         Integer readingLogId = readingLogDao.insertingReadingLogData(readingLogDto);
         return readingLogDao.calculateBolus(readingLogDto, readingLogId);
 

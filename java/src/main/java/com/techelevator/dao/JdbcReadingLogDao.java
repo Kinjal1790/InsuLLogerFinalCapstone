@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.ActivityDTO;
+import com.techelevator.model.AlertInfoDTO;
 import com.techelevator.model.ReadingLogDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -43,16 +44,18 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
     }
 
     @Override
-    public Double calculateBolus(ReadingLogDTO readingLogDto, int readingLogId)
+    public AlertInfoDTO calculateBolus(ReadingLogDTO readingLogDto, int readingLogId)
     {
         Double bolus = 0.0;
-        String sql = "SELECT target_max, sensitivity, carb_insulin_ratio from user_info\n" +
+        String sql = "SELECT target_max, target_min, sensitivity, carb_insulin_ratio from user_info\n" +
                 "where user_id = ?;";
 
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, readingLogDto.getUserId());
-
+        Integer targetMax = 0;
+        Integer targetMin = 0;
         if(result.next()){
-            Integer targetMax = result.getInt("target_max");
+            targetMax = result.getInt("target_max");
+            targetMin = result.getInt("target_min");
             double sensitivity = result.getDouble("sensitivity");
             double carbInsulinRatio = result.getDouble("carb_insulin_ratio");
             String warning = readingLogDto.getWarning();
@@ -61,8 +64,12 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
             bolus = runBolusCalculation(targetMax, sensitivity, carbInsulinRatio, readingLogDto.getCarbIntake(), readingLogDto.getBloodSugarReading(), readingLogId, warning, alert);
         }
 
+        AlertInfoDTO alertInfodto = new AlertInfoDTO();
+        alertInfodto.setBolus(bolus);
+        alertInfodto.setTargetMax(targetMax);
+        alertInfodto.setTargetMin(targetMin);
 
-        return bolus;
+        return alertInfodto;
     }
 
     private double runBolusCalculation(Integer targetMax, double sensitivity, double carbInsulinRatio, double carbIntake, double bloodSugarReading, int readingLogId, String warning, String alert){
