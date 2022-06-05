@@ -42,101 +42,114 @@ public class JdbcReportDao implements ReportDAO {
                 " ORDER BY r.date_and_time;";
 
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id, LocalDate.parse(reportFilterDataDto.getDateFrom()), LocalDate.parse(reportFilterDataDto.getDateTo()));
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id, LocalDate.parse(reportFilterDataDto.getDateFrom()), (LocalDate.parse(reportFilterDataDto.getDateTo()).plusDays(1)));
 
         while(results.next()){
             ReportDTO reportLog = reportLogMap(results);
             reportlogs.add(reportLog);
         }
 
-        if(reportFilterDataDto.getFilter() == 1) {
-            return dailyAverage(reportlogs);
-        } else if (reportFilterDataDto.getFilter() == 3) {
-            return threeDayAverage(reportlogs);
-        }
+//        if(reportFilterDataDto.getFilter() == 1) {
+//            return dailyAverage(reportlogs);
+//        }
+////        else if (reportFilterDataDto.getFilter() != 1) {
+////            return threeDayAverage(reportlogs, reportFilterDataDto.getFilter());
+////        }
 
-        return reportlogs;
-
+       return calculateAverage(reportlogs, reportFilterDataDto.getFilter());
     }
 
-    private List<ReportDTO> dailyAverage(List <ReportDTO> reportlogs) {
+//    private List<ReportDTO> dailyAverage(List <ReportDTO> reportlogs) {
+//
+//        List<ReportDTO> filterList = new ArrayList<>();
+//        int totalBloodSugarReading = 0;
+//        double totalBolusDose = 0.0;
+//        int count = 0;
+//        for(int i = 0; i < reportlogs.size(); i++) {
+//            count ++;
+//            totalBloodSugarReading += reportlogs.get(i).getBloodSugarReading();
+//            totalBolusDose += reportlogs.get(i).getBolusDose();
+//            if(i+1 == reportlogs.size()) {
+//                ReportDTO temp = new ReportDTO();
+//                temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
+//                temp.setDateFrom(reportlogs.get(i).getDateAndTime());
+//                temp.setDateTo(reportlogs.get(i).getDateAndTime());
+//                temp.setBloodSugarReading(totalBloodSugarReading / count);
+//                temp.setBolusDose(totalBolusDose / count);
+//                temp.setTargetMin(reportlogs.get(i).getTargetMin());
+//                temp.setTargetMax(reportlogs.get(i).getTargetMax());
+//                filterList.add(temp);
+//            }
+//            else if(reportlogs.get(i).getDateAndTime().compareTo(reportlogs.get(i+1).getDateAndTime()) != 0) {
+//                ReportDTO temp = new ReportDTO();
+//                temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
+//                temp.setDateFrom(reportlogs.get(i).getDateAndTime());
+//                temp.setDateTo(reportlogs.get(i).getDateAndTime());
+//                temp.setBloodSugarReading(totalBloodSugarReading / count);
+//                temp.setBolusDose(totalBolusDose / count);
+//                temp.setTargetMin(reportlogs.get(i).getTargetMin());
+//                temp.setTargetMax(reportlogs.get(i).getTargetMax());
+//                filterList.add(temp);
+//                totalBloodSugarReading = 0;
+//                totalBolusDose = 0;
+//                count = 0;
+//            }
+//        }
+//
+//        return filterList;
+//    }
+
+    private List<ReportDTO> calculateAverage(List <ReportDTO> reportlogs, int filter) {
 
         List<ReportDTO> filterList = new ArrayList<>();
         int totalBloodSugarReading = 0;
         double totalBolusDose = 0.0;
-        int count = 0;
+        int noOfDate = 1;
+        int rowCount = 0;
+        LocalDate currentDate = reportlogs.get(0).getDate();
+       // LocalDate endDate = reportlogs.get(0).getDateAndTime().plusDays(3);
+        LocalDate fromDate = currentDate;
         for(int i = 0; i < reportlogs.size(); i++) {
-            count ++;
-            totalBloodSugarReading += reportlogs.get(i).getBloodSugarReading();
-            totalBolusDose += reportlogs.get(i).getBolusDose();
-            if(i+1 == reportlogs.size()) {
-                ReportDTO temp = new ReportDTO();
-                temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
-                temp.setDateFrom(reportlogs.get(i).getDateAndTime());
-                temp.setDateTo(reportlogs.get(i).getDateAndTime());
-                temp.setBloodSugarReading(totalBloodSugarReading / count);
-                temp.setBolusDose(totalBolusDose / count);
-                temp.setTargetMin(reportlogs.get(i).getTargetMin());
-                temp.setTargetMax(reportlogs.get(i).getTargetMax());
-                filterList.add(temp);
+            if(currentDate.compareTo(reportlogs.get(i).getDate()) != 0 ){
+                noOfDate++;
+                currentDate = reportlogs.get(i).getDate();
+                if(noOfDate == filter+1){
+
+                    ReportDTO temp = new ReportDTO();
+
+                  //  temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
+                    temp.setDateFrom(fromDate);
+                    temp.setDateTo(reportlogs.get(i-1).getDate());
+                    temp.setBloodSugarReading(Math.round((double)totalBloodSugarReading / rowCount));
+                    temp.setBolusDose((double)totalBolusDose / rowCount);
+                    temp.setTargetMin(reportlogs.get(i).getTargetMin());
+                    temp.setTargetMax(reportlogs.get(i).getTargetMax());
+                    totalBloodSugarReading = 0;
+                    totalBolusDose = 0;
+                    rowCount = 0;
+                    noOfDate = 1;
+                    fromDate = reportlogs.get(i).getDate();
+                    filterList.add(temp);
+                }
             }
-            else if(reportlogs.get(i).getDateAndTime().compareTo(reportlogs.get(i+1).getDateAndTime()) != 0) {
-                ReportDTO temp = new ReportDTO();
-                temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
-                temp.setDateFrom(reportlogs.get(i).getDateAndTime());
-                temp.setDateTo(reportlogs.get(i).getDateAndTime());
-                temp.setBloodSugarReading(totalBloodSugarReading / count);
-                temp.setBolusDose(totalBolusDose / count);
-                temp.setTargetMin(reportlogs.get(i).getTargetMin());
-                temp.setTargetMax(reportlogs.get(i).getTargetMax());
-                filterList.add(temp);
-                totalBloodSugarReading = 0;
-                totalBolusDose = 0;
-                count = 0;
+            if(noOfDate <= filter) {
+                rowCount ++;
+                totalBloodSugarReading += reportlogs.get(i).getBloodSugarReading();
+                totalBolusDose += reportlogs.get(i).getBolusDose();
             }
         }
 
-        return filterList;
-    }
+        ReportDTO temp = new ReportDTO();
 
-    private List<ReportDTO> threeDayAverage(List <ReportDTO> reportlogs) {
+        //  temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
+        temp.setDateFrom(fromDate);
+        temp.setDateTo(reportlogs.get(reportlogs.size()-1).getDate());
+        temp.setBloodSugarReading(Math.round((double)totalBloodSugarReading / rowCount));
+        temp.setBolusDose((double)totalBolusDose / rowCount);
+        temp.setTargetMin(reportlogs.get(reportlogs.size()-1).getTargetMin());
+        temp.setTargetMax(reportlogs.get(reportlogs.size()-1).getTargetMax());
+        filterList.add(temp);
 
-        List<ReportDTO> filterList = new ArrayList<>();
-        int totalBloodSugarReading = 0;
-        double totalBolusDose = 0.0;
-        int count = 0;
-        LocalDate endDate = reportlogs.get(0).getDateAndTime().plusDays(3);
-        for(int i = 0; i < reportlogs.size(); i++) {
-            count ++;
-            totalBloodSugarReading += reportlogs.get(i).getBloodSugarReading();
-            totalBolusDose += reportlogs.get(i).getBolusDose();
-            if(i+1 == reportlogs.size()) {
-                ReportDTO temp = new ReportDTO();
-                temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
-                temp.setDateFrom(reportlogs.get(i).getDateAndTime());
-                temp.setDateTo(reportlogs.get(i).getDateAndTime());
-                temp.setBloodSugarReading(totalBloodSugarReading / count);
-                temp.setBolusDose(totalBolusDose / count);
-                temp.setTargetMin(reportlogs.get(i).getTargetMin());
-                temp.setTargetMax(reportlogs.get(i).getTargetMax());
-                filterList.add(temp);
-            }
-            else if(reportlogs.get(i).getDateAndTime().compareTo(endDate) < 0) {
-                ReportDTO temp = new ReportDTO();
-                temp.setDateAndTime(reportlogs.get(i).getDateAndTime());
-                temp.setDateFrom(reportlogs.get(i).getDateAndTime());
-                temp.setDateTo(reportlogs.get(i).getDateAndTime());
-                temp.setBloodSugarReading(totalBloodSugarReading / count);
-                temp.setBolusDose(totalBolusDose / count);
-                temp.setTargetMin(reportlogs.get(i).getTargetMin());
-                temp.setTargetMax(reportlogs.get(i).getTargetMax());
-                filterList.add(temp);
-                totalBloodSugarReading = 0;
-                totalBolusDose = 0;
-                count = 0;
-                endDate = endDate.plusDays(3);
-            }
-        }
 
         return filterList;
     }
@@ -147,7 +160,7 @@ public class JdbcReportDao implements ReportDAO {
         ReportDTO reportDto = new ReportDTO();
 
         LocalDateTime dt = (results.getTimestamp("date_and_time").toLocalDateTime());
-        reportDto.setDateAndTime(dt.toLocalDate());
+        reportDto.setDate(dt.toLocalDate());
         reportDto.setBloodSugarReading(results.getInt("blood_sugar_reading"));
         reportDto.setBolusDose(results.getDouble("bolus_dose"));
         reportDto.setTargetMin(results.getInt("target_min"));
