@@ -1,12 +1,11 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class ReportDTO {
 
-    private LocalDate dateAndTime;
-    private int bloodSugarReading;
+    private LocalDate date;
+    private double bloodSugarReading;
     private double bolusDose;
     private int targetMin;
     private int targetMax;
@@ -29,22 +28,22 @@ public class ReportDTO {
         this.dateTo = dateTo;
     }
 
-    public LocalDate getDateAndTime() {
-        return dateAndTime;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setDateAndTime(LocalDate dateAndTime) {
-        this.dateAndTime = dateAndTime;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
-    public int getBloodSugarReading() {
+    public double getBloodSugarReading() {
         return bloodSugarReading;
     }
 
     @Override
     public String toString() {
         return "ReportDTO{" +
-                "dateAndTime=" + dateAndTime +
+                "dateAndTime=" + date +
                 ", bloodSugarReading=" + bloodSugarReading +
                 ", bolusDose=" + bolusDose +
                 ", targetMin=" + targetMin +
@@ -52,7 +51,7 @@ public class ReportDTO {
                 '}';
     }
 
-    public void setBloodSugarReading(int bloodSugarReading) {
+    public void setBloodSugarReading(double bloodSugarReading) {
         this.bloodSugarReading = bloodSugarReading;
     }
 
