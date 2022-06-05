@@ -3,10 +3,10 @@
       <header>
           <img class='user-photo' src="../style/user.png" alt="user picture">
           <h2 class='greeting'>Hello, {{this.$store.state.user.firstName}}</h2>
-          <h3>Your current settings:</h3>
+          <h3>Your Current Settings:</h3>
       </header>
       <b-form class='settings-form' @submit.prevent='submitProfileSettings'>
-          <label for="age">Date of birth:</label>
+          <label for="age">Date of Birth:</label>
           <input type="date" id='age' class='form-control' v-model='profile.yob'  placeholder="Date of birth" required autofocus :disabled='disable'>
           
           <label for="sex">Sex:</label>
@@ -15,25 +15,25 @@
           <label for="weight">Weight (lbs):</label>
           <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" step="0.01" required autofocus :disabled='disable'>
 
-          <label for="insulin-name">Insulin name:</label>
+          <label for="insulin-name">Insulin Name:</label>
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus :disabled='disable'>
          
-          <label for="insulin-strength">Insulin strength:</label>
+          <label for="insulin-strength">Insulin Strength:</label>
           <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength' :disabled='disable'></b-form-select>
          
-          <label for="blood-sugar-target">Blood sugar target:</label>
+          <label for="blood-sugar-target">Blood Sugar Target:</label>
           <div class="blood-sugar-range">
                 <input type="number"  v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus :disabled='disable'>
                 <input type="number" v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus :disabled='disable'>
           </div>
 
-          <label for="basal-rate">Basal rate:</label>
+          <label for="basal-rate">Basal Rate:</label>
           <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" step="0.01" required autofocus :disabled='disable'>
          
           <label for="sensitivity-ratio">Sensitivity:</label>
           <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Sensitivity" step="0.01" required autofocus :disabled='disable'>
           
-          <label for="carb-insulin-ratio">Carb-Insulin-Ratio:</label>
+          <label for="carb-insulin-ratio">Carbs/Insulin Ratio:</label>
           <input type="number" id='carb-insulin-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" step="0.01" required autofocus :disabled='disable'>
             
           <button type="submit" v-if='!disable'>Save</button>

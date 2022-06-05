@@ -20,7 +20,18 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    profileSettings: {},
+    profileSettings: {
+                yob: '',
+                sex: '',
+                weight: '',
+                bolusInsulinName: '',
+                insulinStrength: '',
+                targetMin: '',
+                targetMax: '',
+                basalRate: '',
+                sensitivity: '',
+                carbInsulinRatio: ''
+    },
     initialSubmission: false,
   },
   mutations: {
