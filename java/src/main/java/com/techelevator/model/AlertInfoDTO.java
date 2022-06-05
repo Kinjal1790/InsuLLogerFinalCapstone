@@ -2,24 +2,26 @@ package com.techelevator.model;
 
 public class AlertInfoDTO {
 
-    private int targetMin;
-    private int targetMax;
+
     private double bolus;
 
-    public int getTargetMin() {
-        return targetMin;
+    private String warning;
+    private String alert;
+
+    public String getWarning() {
+        return warning;
     }
 
-    public void setTargetMin(int targetMin) {
-        this.targetMin = targetMin;
+    public void setWarning(String warning) {
+        this.warning = warning;
     }
 
-    public int getTargetMax() {
-        return targetMax;
+    public String getAlert() {
+        return alert;
     }
 
-    public void setTargetMax(int targetMax) {
-        this.targetMax = targetMax;
+    public void setAlert(String alert) {
+        this.alert = alert;
     }
 
     public double getBolus() {

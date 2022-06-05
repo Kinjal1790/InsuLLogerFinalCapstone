@@ -27,12 +27,46 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
     @Override
     public Integer insertingReadingLogData(ReadingLogDTO readingLogDto) {
 
+        String sql = "SELECT target_max, target_min from user_info\n" +
+                "where user_id = ?;";
+
+        SqlRowSet result = jdbcTemplate.queryForRowSet(sql, readingLogDto.getUserId());
+        Integer targetMax = 0;
+        Integer targetMin = 0;
+        if(result.next()) {
+            targetMax = result.getInt("target_max");
+            targetMin = result.getInt("target_min");
+
+        }
+
+        if(readingLogDto.getBloodSugarReading() <=65){
+            readingLogDto.setWarning("low");
+            readingLogDto.setAlert("");
+        }
+        else if(readingLogDto.getBloodSugarReading()>65 && readingLogDto.getBloodSugarReading()<targetMin){
+            readingLogDto.setAlert("low");
+            readingLogDto.setWarning("");
+        }
+        else if(readingLogDto.getBloodSugarReading()>targetMin && readingLogDto.getBloodSugarReading()<targetMax){
+            readingLogDto.setAlert("");
+            readingLogDto.setWarning("");
+        }
+        else if(readingLogDto.getBloodSugarReading()>targetMax && readingLogDto.getBloodSugarReading()<300){
+            readingLogDto.setWarning("");
+            readingLogDto.setAlert("high");
+        }
+        else if(readingLogDto.getBloodSugarReading()>=300){
+            readingLogDto.setWarning("high");
+            readingLogDto.setAlert("");
+        }
+
+
         Timestamp dateTime = Timestamp.valueOf(readingLogDto.getDataAndTime());
 
-        String sql = "INSERT INTO reading_log (user_id, carb_intake, blood_sugar_reading, date_and_time, warning, alert)"
+        String sql1 = "INSERT INTO reading_log (user_id, carb_intake, blood_sugar_reading, date_and_time, warning, alert)"
                 + "VALUES (?, ?, ?, ?, ?, ?) returning reading_log_id;";
 
-       Integer readingLogId = jdbcTemplate.queryForObject(sql, Integer.class, readingLogDto.getUserId(),
+       Integer readingLogId = jdbcTemplate.queryForObject(sql1, Integer.class, readingLogDto.getUserId(),
                 readingLogDto.getCarbIntake(),
                 readingLogDto.getBloodSugarReading(),
 //              readingLogDto.getDataAndTime());
@@ -53,21 +87,23 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         SqlRowSet result = jdbcTemplate.queryForRowSet(sql, readingLogDto.getUserId());
         Integer targetMax = 0;
         Integer targetMin = 0;
+        String warning = "";
+        String alert = "";
         if(result.next()){
             targetMax = result.getInt("target_max");
             targetMin = result.getInt("target_min");
             double sensitivity = result.getDouble("sensitivity");
             double carbInsulinRatio = result.getDouble("carb_insulin_ratio");
-            String warning = readingLogDto.getWarning();
-            String alert = readingLogDto.getAlert();
+             warning = readingLogDto.getWarning();
+             alert = readingLogDto.getAlert();
 
             bolus = runBolusCalculation(targetMax, sensitivity, carbInsulinRatio, readingLogDto.getCarbIntake(), readingLogDto.getBloodSugarReading(), readingLogId, warning, alert);
         }
 
         AlertInfoDTO alertInfodto = new AlertInfoDTO();
         alertInfodto.setBolus(bolus);
-        alertInfodto.setTargetMax(targetMax);
-        alertInfodto.setTargetMin(targetMin);
+        alertInfodto.setWarning(warning);
+        alertInfodto.setAlert(alert);
 
         return alertInfodto;
     }
