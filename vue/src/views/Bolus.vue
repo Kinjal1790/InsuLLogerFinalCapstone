@@ -77,19 +77,16 @@ export default {
                 alert: ''
             },
             bolus: '',
-            targetMax: this.$store.state.profileSettings.targetMax,
-            targetMin: this.$store.state.profileSettings.targetMin
+            targetMax: '',
+            targetMin: ''
         }
     },
-    // props: {
-
-    // },
     computed: {
         checkForWarning() {
             if (this.readings.bloodSugarReading > 300) {
                 return 'high'
             }
-            else if (this.readings.bloodSugarReading < 65) {
+            else if (this.readings.bloodSugarReading <= 65) {
                 return 'low'
             }
             return "";
@@ -98,7 +95,7 @@ export default {
             if (this.readings.bloodSugarReading < 300 && this.readings.bloodSugarReading > this.targetMax) {
                 return 'high'
             }
-            else if (this.readings.bloodSugarReading > 65 && this.readings.bloodSugarReading < this.targetMin) {
+            else if (this.readings.bloodSugarReading > 65 && this.readings.bloodSugarReading <= this.targetMin) {
                 return 'low'
             }
             return "";
@@ -132,7 +129,10 @@ export default {
             console.log(this.readings);
             bolusService.sendReadings(this.readings).then((r) => {
                 if (r.status == 201) {
-                    this.bolus = r.data.toFixed(2)
+                    this.bolus = r.data.bolus.toFixed(2);
+                    this.targetMax = r.data.targetMax;
+                    this.targetMin = r.data.targetMin;
+                    console.log(r.data)
                 }
                 else {
                     console.log(r.status)
