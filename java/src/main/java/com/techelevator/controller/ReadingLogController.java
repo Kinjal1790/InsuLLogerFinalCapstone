@@ -5,6 +5,7 @@ import com.techelevator.model.ActivityDTO;
 import com.techelevator.model.AlertInfoDTO;
 import com.techelevator.model.ReadingLogDTO;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,6 +36,12 @@ public class ReadingLogController {
         return readingLogDao.getAllActivityLogs(id);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(path="/activity", method = RequestMethod.GET)
+    public List<ActivityDTO> getAllUserActivity() {
+        return readingLogDao.getAllUserActivityLog();
+    }
 
 
 
