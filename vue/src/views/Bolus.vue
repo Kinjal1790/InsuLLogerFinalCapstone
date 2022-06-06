@@ -94,7 +94,7 @@ export default {
             console.log(this.readings);
             bolusService.sendReadings(this.readings).then((r) => {
                 if (r.status == 201) {
-                    this.bolus = r.data.bolus.toFixed(2);
+                    this.bolus = r.data.bolus.toFixed(1);
                     this.alert = r.data.alert;
                     this.warning = r.data.warning;
                     console.log(r.data)
@@ -144,4 +144,5 @@ export default {
     .side-img img {
         width: 35vw;
     }
+    
 </style>

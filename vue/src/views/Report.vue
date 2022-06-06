@@ -1,49 +1,56 @@
 <template>
 <div class="report">
 
-    <b-form class='report-form'>
+    <b-form class='report-form' @submit.prevent='getReport'>
 
     <div class="date-from">
-        <label for="dateFrom">From</label>
-        <input type="date" id='dateFrom' v-model='reportFilterData.dateFrom' class='form-control' required autofocus>
+        <label for="dateFrom">From :</label>
+        <input type="date"  class= "formItems form-control" id='dateFrom' v-model='reportFilterData.dateFrom' required autofocus>
     </div>
 
     <div class="date-to">
-        <label for="dateTo">To</label>
-        <input type="date" id='dateTo' v-model='reportFilterData.dateTo' class='form-control' required autofocus>
+        <label for="dateTo">To :</label>
+        <input type="date" class= "formItems form-control" id='dateTo' v-model='reportFilterData.dateTo' required autofocus>
     </div>
 
     <div class="filter">
-        <label for="filter">Filter</label>
-          <b-form-select id='filter'  :options='filterOptions' class='form-select' v-model='reportFilterData.filter'></b-form-select>
+        <label for="filter">Filter :</label>
+          <b-form-select id='filter' class= "formItems form-select" :options='filterOptions' v-model='reportFilterData.filter'></b-form-select>
     </div>
 
+    <div>
+        <button id="submit-report" type="submit">Report</button>
+    </div>
+    </b-form>
 
-<table>
-
-    <thead>
-      <tr>
-        <th>&nbsp;</th>
-        <th>From</th>
-        <th>To</th>
-        <th>Blood Sugar (Average)</th>
-        <th>Insulin Bolus (Average)</th>
-        <th>Target Blood sugar (Minimum)</th>
-        <th>Target Blood sugar (Maximum)</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr v-for="row in reportData" :key="row.id">
-        <td class="name">{{ row.dateFrom }}</td>        
-        <td class="name">{{ row.dateTo }}</td>
-        <td class="name">{{ row.bloodSugarReading }}</td>
-        <td class="name">{{ row.bolusDose}}</td>
-        <td class="name">{{ row.targetMin }}</td>
-        <td class="name">{{ row.targetMax }}</td>
-      </tr>
-    </tbody>
-  </table>
+  
+    <div>
+        <h1 id='report-header'>Report</h1>
+        <table id='report'>
+                <thead>
+                    <tr id='head-row'>
+                        <!-- <th>&nbsp;</th> -->
+                        <th>Date (From)</th>
+                        <th>Date (To)</th>
+                        <th>Blood Sugar (Average)</th>
+                        <th>Insulin Bolus (Average)</th>
+                        <th>Target Blood Sugar (Minimum)</th>
+                        <th>Target Blood Sugar (Maximum)</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <tr id= "row-body" v-for="row in reportData" :key="row.id">
+                    <td class="name">{{ row.dateFrom }}</td>        
+                    <td class="name">{{ row.dateTo }}</td>
+                    <td class="name">{{ row.bloodSugarReading.toFixed(0) + " (mg/dL)"}}</td>
+                    <td class="name">{{ row.bolusDose.toFixed(1) + " unit(s)" }}</td>
+                    <td class="name">{{ row.targetMin + " (mg/dL)" }}</td>
+                    <td class="name">{{ row.targetMax + " (mg/dL)" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+   
 
 </div>
 </template>
@@ -59,38 +66,27 @@ export default {
                 'dateTo' : '',
                 'filter' : ''
             },
-            // bloodSugarReading: '',
-            // bolusDose: '',
-            // targetMin: '',
-            // targetMax: '',
-            // dateFrom: '',
-            // dateTo: ''
+          
             reportData: [],
 
             filterOptions: [
-                { value: '1', text: '1'},
-                { value: '3', text: '3'},
-                { value: '7', text: '7'},
-                { value: '14', text: '14'},
-                { value: '30', text: '30'}
+                { value: '1', text: 'Daily'},
+                { value: '3', text: 'Every 3 days'},
+                { value: '7', text: 'Weekly'},
+                { value: '14', text: 'Biweekly'},
+                { value: '30', text: 'Monthly'}
             ]
         }
     },
 
     methods: {
 
-        getReportData(){
+        getReport(){
 
 
-            ReportService.getReport(this.reportFilterData).then((r) => {
-                if(r.status == 201) {
+            ReportService.getReport(this.reportFilterData, this.$store.state.user.id).then((r) => {
+                if(r.status == 200) {
                     this.reportData = r.data;
-                    // this.bloodSugarReading = r.data.bloodSugarReading
-                    // this.bolusDose = r.data.bolusDose.toFixed(2)
-                    // this.targetMin = r.data.targetMin
-                    // this.targetMax = r.data.targetMax
-                    // this.dateFrom = r.data.dateFrom
-                    // this.dateTo = r.dateTo
                 }
                 else{
                     console.log(r.status)
@@ -104,6 +100,61 @@ export default {
 
 </script>
 
+
 <style>
+
+    #report-header {
+        text-align: center;
+        margin: 0.75em 0 0.75em 0;
+    }
+    .report {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+     
+
+   
+    .report-form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 20px;
+        align-items : flex-end;
+        
+    }
+
+    #report {
+        width: 100%;
+    }
+    
+    #submit-report {
+        padding: 0.7em;
+         width: 8em;
+    }
+    
+    #report tr:nth-child(even){
+        background-color: #385a6421;
+    }
+    #report tr:hover {
+        background-color: #fd74595b;
+    }
+    #head-row {
+        text-align: center;
+    }
+    #row-body {
+        width: 100%;
+        text-align: center;
+    }
+    th {
+        background-color: #fd7459;
+        color: white;
+        text-align: center;
+        padding: 1em 0;
+    }
+    #report td{
+        text-align: center;
+        padding: 1em 0;
+    }
 
 </style>

@@ -47,7 +47,7 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
             readingLogDto.setAlert("low");
             readingLogDto.setWarning("");
         }
-        else if(readingLogDto.getBloodSugarReading()>targetMin && readingLogDto.getBloodSugarReading()<targetMax){
+        else if(readingLogDto.getBloodSugarReading()>=targetMin && readingLogDto.getBloodSugarReading()<=targetMax){
             readingLogDto.setAlert("");
             readingLogDto.setWarning("");
         }

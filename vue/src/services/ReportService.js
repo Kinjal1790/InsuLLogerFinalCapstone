@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    getReport(reportFilterData) {
-        return axios.post('/${id}/report', reportFilterData)
+    getReport(reportFilterData, id) {
+        return axios.post(`/${id}/report`, reportFilterData)
     }
 }
