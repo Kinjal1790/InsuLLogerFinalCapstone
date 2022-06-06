@@ -4,6 +4,7 @@
         <table id='activity'>
       <thead>
           <tr id='head-row'>
+              <th>User ID</th>
               <th>Date</th>
               <th>Time of the day</th>
               <th>Blood Sugar Level</th>
@@ -14,6 +15,7 @@
       </thead>
       <tbody>
           <tr v-for="item in activity" :key='item.id'>
+              <td>{{item.userId}}</td>
               <td>{{item.dataAndTime.slice(0, 11)}}</td>
               <td>{{item.dataAndTime.slice(11, 16)}}</td>
               <td>{{item.bloodSugarReading}}</td>
@@ -40,7 +42,6 @@ export default {
         let id = this.$store.state.user.id;
         activityService.getActivity(id).then(r => {
             this.activity = r.data;
-            console.log(this.$store.state.user.authorities[0].name)
         })
     }
 }

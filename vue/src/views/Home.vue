@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home-info">
-      <h1>Welcome to iTracker</h1>
+      <h1>Welcome to InsuLogger</h1>
       <h3>Tracking your blood sugar levels just got a whole lot easier</h3>
       <p>InsuLogger is a multipurpose tool that helps you maintain a healthy lifestyle with diabetes. 
         With InsuLogger’s easy-to-use features, you can monitor your basal blood sugar level and calculate bolus insulin doses so you can worry less about your blood sugar, and focus more on doing what you love. </p>
