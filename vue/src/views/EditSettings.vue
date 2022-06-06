@@ -13,28 +13,28 @@
           <b-form-select id='sex'  :options='sexOptions' class='form-select' v-model='profile.sex' :disabled='disable'></b-form-select>
 
           <label for="weight">Weight (lbs):</label>
-          <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" step="0.01" required autofocus :disabled='disable'>
+          <input type="number" id='weight' v-model='profile.weight' class='form-control' placeholder="Weight (lbs)" step="0.01" min='1' required autofocus :disabled='disable'>
 
           <label for="insulin-name">Insulin Name:</label>
           <input type="text" id='insulin-name' v-model='profile.bolusInsulinName' class='form-control' placeholder="Insulin name" required autofocus :disabled='disable'>
          
           <label for="insulin-strength">Insulin Strength:</label>
-          <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength' :disabled='disable'></b-form-select>
+          <b-form-select id='insulin-strength'  :options='strengthOptions' class='form-select' v-model='profile.insulinStrength'  :disabled='disable'></b-form-select>
          
           <label for="blood-sugar-target">Blood Sugar Target:</label>
           <div class="blood-sugar-range">
-                <input type="number"  v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus :disabled='disable'>
-                <input type="number" v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Min" required autofocus :disabled='disable'>
+                <input type="number"  v-model='profile.targetMin' id='blood-sugar-target' class='form-control' placeholder="Min" min='1' required autofocus :disabled='disable'>
+                <input type="number" v-model='profile.targetMax' id='blood-sugar-target' class='form-control' placeholder="Min" min='1' required autofocus :disabled='disable'>
           </div>
 
           <label for="basal-rate">Basal Rate:</label>
-          <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" step="0.01" required autofocus :disabled='disable'>
+          <input type="number" id='basal-rate' v-model='profile.basalRate' class='form-control' placeholder="Basal rate" step="0.01" min='0.1' required autofocus :disabled='disable'>
          
           <label for="sensitivity-ratio">Sensitivity:</label>
-          <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Sensitivity" step="0.01" required autofocus :disabled='disable'>
+          <input type="number" id='sensitivity-ratio' v-model='profile.sensitivity' class='form-control' placeholder="Sensitivity" step="0.01" min='0.1' required autofocus :disabled='disable'>
           
           <label for="carb-insulin-ratio">Carbs/Insulin Ratio:</label>
-          <input type="number" id='carb-insulin-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" step="0.01" required autofocus :disabled='disable'>
+          <input type="number" id='carb-insulin-ratio' v-model='profile.carbInsulinRatio' class='form-control' placeholder="Carbs/Insulin ratio" step="0.01" min='0.1' required autofocus :disabled='disable'>
             
           <button type="submit" v-if='!disable'>Save</button>
           <button class='edit-btn' @click.prevent='enableInput()' v-if='disable'>Edit</button>
@@ -74,7 +74,7 @@ export default {
                 sensitivity: '',
                 carbInsulinRatio: ''
             },
-            errorMsg: 'problems',
+            // errorMsg: 'problems',
             sexOptions: [
                 { value: 'male', text: 'Male' },
                 { value: 'female', text: 'Female' },
@@ -97,8 +97,8 @@ export default {
             this.disable = false;
         },
         submitProfileSettings() {
-            console.log(this.profile)
-            console.log(this.profile.userId)
+            // console.log(this.profile)
+            // console.log(this.profile.userId)
             profileService.updateSettings(this.profile, this.profile.userId).then(r => {
                 if (r.status == 200) {
                     this.$store.commit("SET_PROFILE_SETTINGS", this.profile);
@@ -109,7 +109,6 @@ export default {
                 else {
                     window.alert("===========")
                 }
-                // this.$router.push('/');
             })
         }
     }
