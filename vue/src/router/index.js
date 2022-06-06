@@ -9,6 +9,7 @@ import EditSettings from '../views/EditSettings.vue'
 import Bolus from '../views/Bolus.vue'
 import store from '../store/index'
 import Report from '../views/Report.vue'
+import ActivityHistory from '../views/ActivityHistory.vue'
 
 Vue.use(Router)
 
@@ -90,6 +91,16 @@ const router = new Router({
           requiresAuth: true
         }
     },
+
+    {
+        path: "/:id/activity",
+        name: "activity",
+        component: ActivityHistory,
+        meta: {
+          requiresAuth: true
+        }
+
+    }
   ]
 })
 
