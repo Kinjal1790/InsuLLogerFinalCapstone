@@ -15,7 +15,7 @@
             
             <router-link v-bind:to="{name: 'bolus'}" v-if="$store.state.token != ''">Generate Bolus</router-link>
             <router-link v-bind:to="{name: 'activity'}" v-if="$store.state.token != ''">Activity</router-link>
-            <a  v-if="$store.state.token != ''">Reports</a>
+            <router-link v-bind:to="{name:'report'}" v-if="$store.state.token != ''">Report</router-link>
             <!-- <router-link v-bind:to='{name: "profile_settings"}'  v-if="$store.state.token != '' && !$store.state.profileSettings.userId">Profile Settings</router-link> -->
             <router-link v-bind:to="{name: 'edit_settings', params: {id: $store.state.user.id}}"  v-if="$store.state.token != ''">Profile Settings</router-link>
             <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Log Out</router-link>
