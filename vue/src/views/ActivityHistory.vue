@@ -40,7 +40,7 @@ export default {
         let id = this.$store.state.user.id;
         activityService.getActivity(id).then(r => {
             this.activity = r.data;
-            console.log(this.$store.state.user.authorities[0].name)
+            // console.log(this.$store.state.user.authorities[0].name)
         })
     }
 }

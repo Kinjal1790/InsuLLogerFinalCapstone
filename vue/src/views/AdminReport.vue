@@ -32,15 +32,15 @@
 <script>
 import activityService from '../services/ActivityService.js'
 export default {
-    name: 'activity-history',
+    name: 'admin-report',
     data() {
         return {
             activity: []
         }
     },
     created() {
-        let id = this.$store.state.user.id;
-        activityService.getActivity(id).then(r => {
+        // let id = this.$store.state.user.id;
+        activityService.getAdminHistory().then(r => {
             this.activity = r.data;
         })
     }
