@@ -8,6 +8,9 @@ import ProfileSettings from '../views/ProfileSettings.vue'
 import EditSettings from '../views/EditSettings.vue'
 import Bolus from '../views/Bolus.vue'
 import store from '../store/index'
+import Report from '../views/Report.vue'
+import ActivityHistory from '../views/ActivityHistory.vue'
+import AdminReport from '../views/AdminReport.vue'
 
 Vue.use(Router)
 
@@ -79,6 +82,34 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+
+      {
+        path: "/:id/report",
+        name: "report",
+        component: Report,
+        meta: {
+          requiresAuth: true
+        }
+    },
+
+    {
+        path: "/:id/activity",
+        name: "activity",
+        component: ActivityHistory,
+        meta: {
+          requiresAuth: true
+        }
+
+    },
+    {
+        path: "/activity",
+        name: "admin-report",
+        component: AdminReport,
+        meta: {
+          requiresAuth: true
+        }
+
     },
   ]
 })
