@@ -77,7 +77,7 @@ CREATE TABLE reading_log (
                            reading_log_id int DEFAULT nextval('seq_reading_log_id'::regclass) NOT NULL,
 --                           reading_log SERIAL NOT NULL PRIMARY KEY,
                            user_id int NOT NULL,
-                           carb_intake DECIMAL(4,2) NOT NULL,
+                           carb_intake DECIMAL(5,2) NOT NULL,
                            blood_sugar_reading int NOT NULL,
 --                         date_and_time VARCHAR(50) NOT NULL,
                            date_and_time TIMESTAMP NOT NULL,
@@ -87,12 +87,7 @@ CREATE TABLE reading_log (
 --                            CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE user_info_reading_log (
-                        ui_rl_id int DEFAULT nextval('seq_ui_rl_id'::regclass) NOT NULL,
-                        user_info_id int NOT NULL,
-                        reading_log_id int NOT NULL,
-                        CONSTRAINT PK_user_info_reading_log PRIMARY KEY (ui_rl_id)
-);
+
 
 CREATE TABLE bolus_log (
                         bolus_log_id int DEFAULT nextval('seq_bolus_log_id'::regclass) NOT NULL,
@@ -117,20 +112,11 @@ ADD CONSTRAINT FK_user
 FOREIGN KEY (user_id)
     REFERENCES users(user_id);
 
-ALTER TABLE user_info_reading_log
-ADD CONSTRAINT FK_user_info
-FOREIGN KEY (user_info_id)
-    REFERENCES user_info(user_info_id);
-
- ALTER TABLE user_info_reading_log
- ADD CONSTRAINT FK_reading_log
- FOREIGN KEY (reading_log_id)
-     REFERENCES reading_log(reading_log_id);
 
 ALTER TABLE bolus_log
-    ADD CONSTRAINT FK_reading_log
-        FOREIGN KEY (reading_log_id)
-            REFERENCES reading_log(reading_log_id);
+ADD CONSTRAINT FK_reading_log
+FOREIGN KEY (reading_log_id)
+     REFERENCES reading_log(reading_log_id);
 
 
 
