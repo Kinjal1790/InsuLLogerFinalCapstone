@@ -187,6 +187,28 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
 
 
 //    @Override
+//    public List<ActivityDTO> getUserActivityLogById(int id) {
+//
+//        List<ActivityDTO> UserActivityLogs = new ArrayList<>();
+//
+//        String sql = "SELECT r.date_and_time, r.user_id, r.carb_intake, r.blood_sugar_reading, b.bolus_dose, r.warning, r.alert " +
+//                " from reading_log as r " +
+//                " inner join bolus_log as b " +
+//                " on r.reading_log_id = b.reading_log_id " +
+//                " where r.user_id = ? " +
+//                " order by r.date_and_time desc; ";
+//
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+//        while (results.next()) {
+//            ActivityDTO activityLog = activityLogMap(results);
+//            UserActivityLogs.add(activityLog);
+//        }
+//        return UserActivityLogs;
+//    }
+
+
+
+//    @Override
 //    public List<ReadingLogDTO> getAllReadingLogs(int id) {
 //        List<ReadingLogDTO> readingLogs = new ArrayList<>();
 //

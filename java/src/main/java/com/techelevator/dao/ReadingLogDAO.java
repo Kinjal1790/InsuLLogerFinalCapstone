@@ -16,4 +16,5 @@ public interface ReadingLogDAO {
 //    List<ReadingLogDTO> getAllReadingLogs(int id);
     AlertInfoDTO calculateBolus(ReadingLogDTO readingLogDto, int readingLogId);
 
+//    List<ActivityDTO> getUserActivityLogById(int id);
 }
