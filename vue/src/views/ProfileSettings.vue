@@ -40,6 +40,17 @@
           
             <button type="submit">Submit</button>
     </b-form>
+    <b-modal id="bv-modal-settings" size='lg' centered hide-header>
+        <div class="d-block text-center">
+             <h3>Your settings were successfully saved!</h3>
+        </div>
+              <!-- <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-bolus')">Okay</b-button> -->
+        <template #modal-footer="{ ok }">
+            <b-button id='modal-btn' variant="success" @click="ok()">
+                OK
+            </b-button>
+        </template>
+    </b-modal>
   </div>
 </template>
 
@@ -87,9 +98,9 @@ export default {
                 if (r.status == 201) {
                     this.$store.commit("SET_PROFILE_SETTINGS", this.profile);
                     // this.$store.commit("SET_INITIAL_SUBMISSION");
+                    this.$bvModal.show('bv-modal-settings')
                     this.$router.push('/');
                     
-                    window.alert('success')
                 }
                 else {
                     window.alert("===========")

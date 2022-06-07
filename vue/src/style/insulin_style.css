@@ -87,7 +87,8 @@
       color: var(--i_text_color);
   }
   nav > a:hover {
-      color: var(--i_green);
+      color: rgb(32, 115, 136);
+      text-decoration: underline;
   }
   h1, h2, h3 {
     font-family: 'Montserrat Alternates', sans-serif;
@@ -95,5 +96,33 @@
   }
   .company-name {
       letter-spacing: 15px;
+  }
+
+  /* for mobile */
+  @media screen and (max-width: 900px) {
+    #nav {
+      display: flex;
+      flex-direction: column;
+    }
+    nav {
+      flex-direction: column;
+    }
+    .side-img {
+      /* width: 100% */
+    }
+    #login, #register, #settings {
+      background-color: var(--i_muted_green);
+      width: 80vw;
+      margin: 1em auto;
+      padding: 2em;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    }
+    #app div:nth-child(2) {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    /* .home {
+      margin-top: -3em;
+    } */
   }
   
