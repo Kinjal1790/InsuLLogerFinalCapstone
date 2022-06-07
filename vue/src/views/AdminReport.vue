@@ -2,29 +2,32 @@
     <div>
         <h1 id='activity-header'>Your Activity History</h1>
         <table id='activity'>
-      <thead>
-          <tr id='head-row'>
-              <th>User ID</th>
-              <th>Date</th>
-              <th>Time of the day</th>
-              <th>Blood Sugar Level</th>
-              <th>Carbs Intake</th>
-              <th>Warning</th>
-              <th>Alert</th>
-          </tr>
-      </thead>
+            <thead>
+                <tr id='head-row'>
+                    <th>User ID</th>
+                    <th>Date / Time</th>
+                    <!-- <th>Time of the day</th> -->
+                    <th>Blood Sugar Level</th>
+                    <th>Bolus</th> 
+                    <th>Carbs Intake</th>
+                    <th>Warning</th>
+                    <th>Alert</th>
+                </tr>
+            </thead>
       <tbody>
           <tr v-for="item in activity" :key='item.id'>
               <td>{{item.userId}}</td>
-              <td>{{item.dataAndTime.slice(0, 11)}}</td>
-              <td>{{item.dataAndTime.slice(11, 16)}}</td>
+              <!-- <td>{{item.dataAndTime.slice(0, 11)}}</td>
+              <td>{{item.dataAndTime.slice(11, 16)}}</td> -->
+              <td>{{item.dataAndTime.slice(0,16) | formatDate1}}</td>
               <td>{{item.bloodSugarReading}}</td>
+              <td>{{item.bolus.toFixed(1)}}</td>
               <td>{{item.carbIntake}}</td>
               <td>{{item.warning == "high" ? "Dangerously High Blood Sugar" : item.warning == 'low' ? 'Dangerously Low Blood Sugar' : ""}}</td>
               <td>{{item.alert == "high" ? "Blood Sugar Higher than Normal" : item.alert == 'low' ? 'Blood Sugar Lower than Normal' : ""}}</td>
           </tr>
       </tbody>
-  </table>
+    </table>
     </div>
   
 </template>

@@ -43,7 +43,7 @@
 
           <b-modal id="bv-modal-warning" size='lg' centered >
               <template #modal-header="{ }">
-                    <h3>Alert</h3>
+                    <h3>Warning</h3>
             </template>
               <div class="d-block text-center">
                   <h3>{{warning == "high" ?

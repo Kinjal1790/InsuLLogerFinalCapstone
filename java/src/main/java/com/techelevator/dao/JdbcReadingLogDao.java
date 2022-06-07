@@ -134,7 +134,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
                 " from reading_log as r " +
                 " inner join bolus_log as b " +
                 " on r.reading_log_id = b.reading_log_id " +
-                " where r.user_id = ?;";
+                " where r.user_id = ? " +
+                " order by r.date_and_time desc; ";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
@@ -152,7 +153,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         String sql = "SELECT r.date_and_time, r.user_id, r.carb_intake, r.blood_sugar_reading, b.bolus_dose, r.warning, r.alert " +
                 " from reading_log as r " +
                 " inner join bolus_log as b " +
-                " on r.reading_log_id = b.reading_log_id; ";
+                " on r.reading_log_id = b.reading_log_id " +
+                " order by r.date_and_time desc; ";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
