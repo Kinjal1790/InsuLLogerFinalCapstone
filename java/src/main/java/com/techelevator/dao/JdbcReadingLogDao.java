@@ -172,7 +172,12 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
             activityLogDto.setUserId(results.getInt("user_id"));
             activityLogDto.setCarbIntake(results.getDouble("carb_intake"));
             activityLogDto.setBloodSugarReading(results.getInt("blood_sugar_reading"));
-            activityLogDto.setBolus(results.getDouble("bolus_dose"));
+            if (results.getDouble("bolus_dose")<0){
+               activityLogDto.setBolus(0.0);
+            }
+            else{
+               activityLogDto.setBolus(results.getDouble("bolus_dose"));
+            }
             activityLogDto.setWarning(results.getString("warning"));
             activityLogDto.setAlert(results.getString("alert"));
         return activityLogDto;

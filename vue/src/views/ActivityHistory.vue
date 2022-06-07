@@ -7,6 +7,7 @@
               <th>Date / Time</th>
               <!-- <th>Time of the day</th> -->
               <th>Blood Sugar Level</th>
+              <th>Bolus</th>    
               <th>Carbs Intake</th>
               <th>Warning</th>
               <th>Alert</th>
@@ -21,6 +22,7 @@
               <!-- <td>{{item.dataAndTime.slice(11, 16)}}</td> -->
 
               <td>{{item.bloodSugarReading}}</td>
+              <td>{{item.bolus}}</td>
               <td>{{item.carbIntake}}</td>
               <td>{{item.warning == "high" ? "Dangerously High Blood Sugar" : item.warning == 'low' ? 'Dangerously Low Blood Sugar' : ""}}</td>
               <td>{{item.alert == "high" ? "Blood Sugar Higher than Normal" : item.alert == 'low' ? 'Blood Sugar Lower than Normal' : ""}}</td>
