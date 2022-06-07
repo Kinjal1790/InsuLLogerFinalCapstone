@@ -40,12 +40,14 @@
                 </thead>
             <tbody>
                 <tr id= "row-body" v-for="row in reportData" :key="row.id">
-                    <td class="name">{{ row.dateFrom }}</td>        
-                    <td class="name">{{ row.dateTo }}</td>
+                    <td class="name">{{ row.dateFrom | formatDate }}</td>        
+                    <td class="name">{{ row.dateTo | formatDate }}</td>
                     <td class="name">{{ row.bloodSugarReading.toFixed(0) + " (mg/dL)"}}</td>
                     <td class="name">{{ row.bolusDose.toFixed(1) + " unit(s)" }}</td>
                     <td class="name">{{ row.targetMin + " (mg/dL)" }}</td>
                     <td class="name">{{ row.targetMax + " (mg/dL)" }}</td>
+
+                    
                 </tr>
             </tbody>
         </table>
@@ -168,6 +170,7 @@ export default {
 
     #report {
         width: 100%;
+        margin-bottom: 30px;
     }
     
     #submit-report {
