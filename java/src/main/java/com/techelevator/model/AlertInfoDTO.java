@@ -8,6 +8,26 @@ public class AlertInfoDTO {
     private String warning;
     private String alert;
 
+    private int targetMin;
+
+    private int targetMax;
+
+    public int getTargetMin() {
+        return targetMin;
+    }
+
+    public void setTargetMin(int targetMin) {
+        this.targetMin = targetMin;
+    }
+
+    public int getTargetMax() {
+        return targetMax;
+    }
+
+    public void setTargetMax(int targetMax) {
+        this.targetMax = targetMax;
+    }
+
     public String getWarning() {
         return warning;
     }

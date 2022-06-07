@@ -2,6 +2,7 @@
     <div>
         <div id='filter-portion'>
             <div class="controllers">
+
             <b-form class='report-form' @submit.prevent='getActivityById'>
                 <div class="user-id-input">
                     <label for="user-id-input">Filter:</label>
@@ -17,8 +18,15 @@
                     <button id="reset-report">Reset</button>
                 </div>
             </b-form>
+
+            <b-form class='report-form' @submit.prevent="exportTableToCSV('report.csv')">
+                <div>
+                    <button id='export-report'>Export</button>
+                </div>
+            </b-form>
+
         </div>
-            </div>
+    </div>
         
 
         <h1 id='activity-header'>Activity History</h1>
@@ -90,10 +98,53 @@ export default {
 
         reset(){
             this.filteredActivity = this.$store.state.activityHistoryAllUsers
+        },
+
+        downloadCSV(csv, filename) {
+            let csvFile;
+            let downloadLink;
+
+            // CSV file
+            csvFile = new Blob([csv], {type: "text/csv"});
+
+            // Download link
+            downloadLink = document.createElement("a");
+
+            // File name
+            downloadLink.download = filename;
+
+            // Create a link to the file
+            downloadLink.href = window.URL.createObjectURL(csvFile);
+
+            // Hide download link
+            downloadLink.style.display = "none";
+
+            // Add the link to DOM
+            document.body.appendChild(downloadLink);
+
+            // Click download link
+            downloadLink.click();
+        },
+
+        exportTableToCSV(filename) {
+            let csv = [];
+            let rows = document.querySelectorAll("table tr");
+            
+            for (let i = 0; i < rows.length; i++) {
+                var row = [], cols = rows[i].querySelectorAll("td, th");
+                
+                for (let j = 0; j < cols.length; j++) 
+                    row.push(cols[j].innerText);
+                
+                csv.push(row.join(","));        
+            }
+
+            // Download CSV file
+            this.downloadCSV(csv.join("\n"), filename);
         }
 
-
-    }}
+    }
+}
 
 
 
@@ -103,7 +154,7 @@ export default {
 <style>
     #activity-header {
         text-align: center;
-        margin: 1em 0 2em 0;
+        margin: 0.75em 0 1em 0;
     }
     #activity {
         border-collapse: collapse;
@@ -129,14 +180,14 @@ export default {
         padding: 1em 0;
     }
 
-     #submit-report, #reset-report {
+     #submit-report, #reset-report, #export-report {
         padding: 0.7em;
          width: 8em;
          border-radius: 25px;
     }
     .controllers {
         display: grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 2fr 1fr 1fr;
     }
    
 

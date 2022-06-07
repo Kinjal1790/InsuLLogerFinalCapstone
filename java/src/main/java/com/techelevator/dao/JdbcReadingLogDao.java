@@ -104,6 +104,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         alertInfodto.setBolus(bolus);
         alertInfodto.setWarning(warning);
         alertInfodto.setAlert(alert);
+        alertInfodto.setTargetMin(targetMin);
+        alertInfodto.setTargetMax(targetMax);
 
         return alertInfodto;
     }
