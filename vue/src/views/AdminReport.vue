@@ -4,8 +4,9 @@
         <table id='activity'>
       <thead>
           <tr id='head-row'>
-              <th>Date / Time</th>
-              <!-- <th>Time of the day</th> -->
+              <th>User ID</th>
+              <th>Date</th>
+              <th>Time of the day</th>
               <th>Blood Sugar Level</th>
               <th>Carbs Intake</th>
               <th>Warning</th>
@@ -14,12 +15,9 @@
       </thead>
       <tbody>
           <tr v-for="item in activity" :key='item.id'>
-              <!-- <td>{{item.dataAndTime.slice(0, 11) | formatDate}}</td>
-              <td>{{item.dataAndTime.slice(11, 16)}}</td> -->
-
-              <td>{{item.dataAndTime.slice(0,16) | formatDate1}}</td>
-              <!-- <td>{{item.dataAndTime.slice(11, 16)}}</td> -->
-
+              <td>{{item.userId}}</td>
+              <td>{{item.dataAndTime.slice(0, 11)}}</td>
+              <td>{{item.dataAndTime.slice(11, 16)}}</td>
               <td>{{item.bloodSugarReading}}</td>
               <td>{{item.carbIntake}}</td>
               <td>{{item.warning == "high" ? "Dangerously High Blood Sugar" : item.warning == 'low' ? 'Dangerously Low Blood Sugar' : ""}}</td>
@@ -34,17 +32,16 @@
 <script>
 import activityService from '../services/ActivityService.js'
 export default {
-    name: 'activity-history',
+    name: 'admin-report',
     data() {
         return {
             activity: []
         }
     },
     created() {
-        let id = this.$store.state.user.id;
-        activityService.getActivity(id).then(r => {
+        // let id = this.$store.state.user.id;
+        activityService.getAdminHistory().then(r => {
             this.activity = r.data;
-            // console.log(this.$store.state.user.authorities[0].name)
         })
     }
 }
@@ -53,12 +50,11 @@ export default {
 <style>
     #activity-header {
         text-align: center;
-        margin: 0.60em 0 0.75em 0;
+        margin: 1em 0 2em 0;
     }
     #activity {
         border-collapse: collapse;
         width: 100%;
-        margin-bottom: 30px;
     }
     #activity tr:nth-child(even){
         background-color: #385a6421;

@@ -10,6 +10,7 @@ import Bolus from '../views/Bolus.vue'
 import store from '../store/index'
 import Report from '../views/Report.vue'
 import ActivityHistory from '../views/ActivityHistory.vue'
+import AdminReport from '../views/AdminReport.vue'
 
 Vue.use(Router)
 
@@ -100,7 +101,16 @@ const router = new Router({
           requiresAuth: true
         }
 
-    }
+    },
+    {
+        path: "/activity",
+        name: "admin-report",
+        component: AdminReport,
+        meta: {
+          requiresAuth: true
+        }
+
+    },
   ]
 })
 
