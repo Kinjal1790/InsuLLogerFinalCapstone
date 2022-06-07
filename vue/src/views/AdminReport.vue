@@ -1,22 +1,25 @@
 <template>
     <div>
         <div id='filter-portion'>
-        <b-form class='report-form' @submit.prevent='getActivityById'>
-            <div class="user-id-input">
-                <label for="user-id-input">Filter:</label>
-                <input type="number" id='user-id-input' v-model='id' class='form-control' placeholder="User-ID" step="0.01" required autofocus>
-            </div>
-            <div>
-                <button id="submit-report">Submit</button>
-            </div>
-        </b-form>
+            <div class="controllers">
+            <b-form class='report-form' @submit.prevent='getActivityById'>
+                <div class="user-id-input">
+                    <label for="user-id-input">Filter:</label>
+                    <input type="number" id='user-id-input' v-model='id' class='form-control' placeholder="User-ID" step="0.01" required autofocus>
+                </div>
+                <div>
+                    <button id="submit-report">Submit</button>
+                </div>
+            </b-form>
 
-         <b-form class='report-form' @submit.prevent='reset'>
-            <div>
-                <button id="submit-report">Reset</button>
-            </div>
-        </b-form>
+            <b-form class='report-form' @submit.prevent='reset'>
+                <div>
+                    <button id="reset-report">Reset</button>
+                </div>
+            </b-form>
         </div>
+            </div>
+        
 
         <h1 id='activity-header'>Activity History</h1>
         <table id='activity'>
@@ -126,10 +129,16 @@ export default {
         padding: 1em 0;
     }
 
-     #submit-report {
+     #submit-report, #reset-report {
         padding: 0.7em;
          width: 8em;
+         border-radius: 25px;
     }
+    .controllers {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+   
 
    
 </style>
