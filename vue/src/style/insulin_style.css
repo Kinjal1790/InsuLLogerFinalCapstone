@@ -22,7 +22,7 @@
 .logo {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
     flex-grow: 1;
     font-family: 'Montserrat Alternates', sans-serif;
     color: var(--i_green)
@@ -31,9 +31,16 @@
     display: flex;
     flex-grow: 2;
     justify-content: space-evenly;
+    font-size: 1.1em;
+  }
+  nav a {
+    text-decoration: none;
   }
   .logo img {
-      max-width: 3em;
+      max-width: 2.4em;
+  }
+  .logo h2 {
+    padding-left: 0.7em;
   }
   #login, #register, #settings {
     background-color: var(--i_muted_green);

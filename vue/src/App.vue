@@ -5,7 +5,7 @@
   <div id="app" class='container'>
     <div id="nav">
       <div class="logo">
-        <img src="@/style/Blood_drop_plain.svg.png" alt="logo">
+        <img src="@/style/insulogger_logo.png" alt="logo">
         <h2 class='company-name'>InsuLogger</h2>
       </div>
       <nav>
