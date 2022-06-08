@@ -3,6 +3,11 @@
 
     <b-form class='report-form' @submit.prevent='getReport'>
 
+    <div id="details">
+        <p>Select the days that you would like to view reports for using the drop-down calender.</p>
+        <p> Then, select a filter that will average the blood sugar levels and bolus insulin dosages based on the filter.</p>
+    </div>
+
     <div class="date-from">
         <label for="dateFrom">From :</label>
         <input type="date"  class= "formItems form-control" id='dateFrom' v-model='reportFilterData.dateFrom' required autofocus>
@@ -27,6 +32,7 @@
     </div>
     
     </b-form>
+
 
     <div v-show="isFormVisible">
         <h1 id='report-header'>Report</h1>

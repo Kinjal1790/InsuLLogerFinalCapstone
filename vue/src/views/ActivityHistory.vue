@@ -2,10 +2,14 @@
     <div>
         <div class="controllers">
             <h1 id='activity-header'>Your Activity History</h1>
-            <b-form id='export-button' @submit.prevent="exportTableToCSV('report.csv')">
+            <b-form id='export-button' @submit.prevent="exportTableToCSV('activity.csv')">
                 <button id='export-report'>Export</button>
             </b-form>
         </div>
+
+    <div id="details">
+        <p>A detailed summary of all of your meal times, blood sugar levels, bolus doses, alerts and warnings since creating your account.</p>
+    </div>
 
   <table id='activity'>
       <thead>
@@ -153,6 +157,10 @@ export default {
 
     #export-button {
         margin: 48px;
+    }
+
+    #details {
+        text-align: center;
     }
 
     
