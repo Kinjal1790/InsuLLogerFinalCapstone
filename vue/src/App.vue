@@ -10,7 +10,7 @@
       </div>
       <nav>
             <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-            <a v-if="$store.state.token == ''">About</a>
+            <router-link v-bind:to="{name: 'about'}" v-if="$store.state.token == ''">About</router-link>
             <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
             
             <router-link v-bind:to="{name: 'bolus'}" v-if="$store.state.token != ''">Generate Bolus</router-link>
