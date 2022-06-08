@@ -11,6 +11,7 @@ import store from '../store/index'
 import Report from '../views/Report.vue'
 import ActivityHistory from '../views/ActivityHistory.vue'
 import AdminReport from '../views/AdminReport.vue'
+import About from '../views/About.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About,
       meta: {
         requiresAuth: false
       }

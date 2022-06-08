@@ -11,7 +11,7 @@
       <nav v-bind:class="[isOpen ? 'topnav responsive' : 'topnav']">
         <span  v-if="$store.state.token != '' && $store.state.user.authorities[0].name == 'ROLE_ADMIN'">You are logged in as Admin!</span>
             <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-            <a v-if="$store.state.token == ''">About</a>
+            <router-link v-bind:to="{name: 'about'}" v-if="$store.state.token == ''">About</router-link>
             <router-link v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
             
             <router-link v-bind:to="{name: 'bolus'}" v-if="$store.state.token != ''  && $store.state.user.authorities[0].name != 'ROLE_ADMIN'">Generate Bolus</router-link>
