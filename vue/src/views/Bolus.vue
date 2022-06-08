@@ -4,7 +4,7 @@
       <img src="../style/carbs.jpg" alt="a woman measuring her blood sugar level">
     </div>
       <form class="bolus-form"  @submit.prevent='getBolus'>
-          <h2>Put something here</h2>
+          <h2>Please provide this information to generate your bolus:</h2>
           <label for="carb-intake">Carbs Intake (g):</label>
           <input v-model='readings.carbIntake' id='carb-intake' type="number" step="0.01">
           <label for="bl-sugar-reading">Blood Sugar Level (mg/dL):</label>
@@ -86,7 +86,11 @@ export default {
     },
    
     methods: {
-        
+        resetForm() {
+            this.readings.bloodSugarReading = "";
+            this.readings.carbIntake = "";
+            
+        },
         getBolus() {
             let today = new Date();
             let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -105,6 +109,7 @@ export default {
                     console.log(r.data)
                     console.log(this.alert, r.data.warning, this.bolus)
                     this.chooseModal()
+                    this.resetForm()
                 }
                 else {
                     console.log(r.status)

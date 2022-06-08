@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div class="controllers">
+        <div class="activity-controllers">
             <h1 id='activity-header'>Your Activity History</h1>
             <b-form id='export-button' @submit.prevent="exportTableToCSV('activity.csv')">
                 <button id='export-report'>Export</button>
             </b-form>
         </div>
 
-    <div id="details">
+    <div class="details">
         <p>A detailed summary of all of your meal times, blood sugar levels, bolus doses, alerts and warnings since creating your account.</p>
     </div>
 
-  <table id='activity'>
+  <table id='activity-table'>
       <thead>
           <tr id='head-row'>
               <th>Date / Time</th>
@@ -118,17 +118,20 @@ export default {
         align-items: center;
     }
 
-    #activity {
+    #activity-table {
         border-collapse: collapse;
         width: 100%;
         margin-bottom: 30px;
+        border-radius: 30px;
+        border-collapse: collapse;
+        overflow: hidden;
     }
 
-    #activity tr:nth-child(even){
+    #activity-table tr:nth-child(even){
         background-color: #385a6421;
     }
 
-    #activity tr:hover {
+    #activity-table tr:hover {
         background-color: #fd74595b;
     }
 
@@ -143,7 +146,7 @@ export default {
         padding: 1em 0;
     }
 
-    #activity td {
+    #activity-table td {
         text-align: center;
         padding: 1em 0;
     }
@@ -159,10 +162,19 @@ export default {
         margin: 48px;
     }
 
-    #details {
+    .details {
         text-align: center;
+        font-size: 1.1em;
+        margin: -10px 0 30px 0;
     }
-
+    .activity-controllers {
+        display: flex;
+        align-items: center;
+    }
+    .activity-controllers h1 {
+        padding-left: 224px;
+    }
+    
     
 
   

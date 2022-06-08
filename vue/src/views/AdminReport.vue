@@ -30,7 +30,7 @@
         
 
         <h1 id='activity-header'>Activity History</h1>
-        <table id='activity'>
+        <table id='activity-table'>
             <thead>
                 <tr id='head-row'>
                     <th>User ID</th>

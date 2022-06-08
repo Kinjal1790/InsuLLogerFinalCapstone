@@ -1,12 +1,11 @@
 <template>
 <div class="report">
-
-    <b-form class='report-form' @submit.prevent='getReport'>
-
-    <div id="details">
-        <p>Select the days that you would like to view reports for using the drop-down calender.</p>
-        <p> Then, select a filter that will average the blood sugar levels and bolus insulin dosages based on the filter.</p>
+    <h1 id='report-header'>Report</h1>
+    <div class="details">
+        <p>Select the days that you would like to view reports for using the drop-down calender. <br>
+        Then, select a filter that will average the blood sugar levels and bolus insulin dosages based on the filter.</p>
     </div>
+    <b-form class='report-form' @submit.prevent='getReport'>
 
     <div class="date-from">
         <label for="dateFrom">From :</label>
@@ -35,7 +34,7 @@
 
 
     <div v-show="isFormVisible">
-        <h1 id='report-header'>Report</h1>
+        
         <table id='report'>
                 <thead>
                     <tr id='head-row'>
@@ -162,7 +161,7 @@ export default {
 
     #report-header {
         text-align: center;
-        margin: 0.75em 0 0.75em 0;
+        margin: 0.4em 0 0.75em 0;
     }
     .report {
         border-collapse: collapse;
@@ -173,7 +172,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        margin: 20px;
+        margin: 2em 20px 2em 20px;
         align-items : flex-end;
         
     }
@@ -181,6 +180,9 @@ export default {
     #report {
         width: 100%;
         margin-bottom: 30px;
+        border-radius: 30px;
+        border-collapse: collapse;
+        overflow: hidden;
     }
     
    
@@ -189,9 +191,6 @@ export default {
         width: 8em;
 
     }
-
-    
-    
     #report tr:nth-child(even){
         background-color: #385a6421;
     }
@@ -215,5 +214,11 @@ export default {
         text-align: center;
         padding: 1em 0;
     }
+    .report .details {
+        margin: 0.5em 0 1em 0;
+        /* text-align: left;
+        margin-left: 5em; */
+    }
+
 
 </style>
