@@ -4,6 +4,7 @@
       <img src="../style/carbs.jpg" alt="a woman measuring her blood sugar level">
     </div>
       <form class="bolus-form"  @submit.prevent='getBolus'>
+          <h2>Put something here</h2>
           <label for="carb-intake">Carbs Intake (g):</label>
           <input v-model='readings.carbIntake' id='carb-intake' type="number" step="0.01">
           <label for="bl-sugar-reading">Blood Sugar Level (mg/dL):</label>
@@ -28,7 +29,7 @@
 
           <b-modal id="bv-modal-alert" size='lg' centered >
               <template #modal-header="{ }">
-                    <h3>Alert</h3>
+                    <h2 class='message-title'>Alert</h2>
             </template>
               <div class="d-block text-center">
                   <h3>{{alert == "high" ? `Your blood sugar is higher than your target maximum (${targetMax}) !` : `Your blood sugar is lower than your target minimum (${targetMin}) !`}}</h3>
@@ -43,7 +44,7 @@
 
           <b-modal id="bv-modal-warning" size='lg' centered >
               <template #modal-header="{ }">
-                    <h3>Warning</h3>
+                    <h2 class='message-title'>Warning</h2>
             </template>
               <div class="d-block text-center">
                   <h3>{{warning == "high" ?
@@ -148,5 +149,19 @@ export default {
     .side-img img {
         width: 35vw;
     }
+    .bolus-form input {
+        border: 1px solid #558999;
+        border-radius: 5px;
+        padding: 0.3em;
+    }
+    .bolus-form input:focus {
+        border: 1px solid pink;
+        border-radius: 5px;
+        padding: 0.3em;
+    }
+    .message-title {
+        color: #fd7459;
+    }
+    
     
 </style>
