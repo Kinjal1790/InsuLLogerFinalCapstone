@@ -1,6 +1,10 @@
 <template>
 <div class="report">
-
+    <h1 id='report-header'>Report</h1>
+    <div class="details">
+        <p>Select the days that you would like to view reports for using the drop-down calender. <br>
+        Then, select a filter that will average the blood sugar levels and bolus insulin dosages based on the filter.</p>
+    </div>
     <b-form class='report-form' @submit.prevent='getReport'>
 
     <div class="date-from">
@@ -15,17 +19,22 @@
 
     <div class="filter">
         <label for="filter">Filter :</label>
-          <b-form-select id='filter' class= "formItems form-select" :options='filterOptions' v-model='reportFilterData.filter'></b-form-select>
+        <b-form-select id='filter' class= "formItems form-select" :options='filterOptions' v-model='reportFilterData.filter'></b-form-select>
     </div>
 
     <div>
         <button id="submit-report" type="submit">Report</button>
     </div>
+
+    <div>
+        <button v-show="isFormVisible" id="export-report" v-on:click="exportTableToCSV('report.csv')">Export</button>
+    </div>
+    
     </b-form>
 
-  
-    <div>
-        <h1 id='report-header'>Report</h1>
+
+    <div v-show="isFormVisible">
+        
         <table id='report'>
                 <thead>
                     <tr id='head-row'>
@@ -46,15 +55,10 @@
                     <td class="name">{{ row.bolusDose.toFixed(1) + " unit(s)" }}</td>
                     <td class="name">{{ row.targetMin + " (mg/dL)" }}</td>
                     <td class="name">{{ row.targetMax + " (mg/dL)" }}</td>
-
-                    
                 </tr>
             </tbody>
-        </table>
-        <button v-on:click="exportTableToCSV('report.csv')">Export</button>
+        </table>   
     </div>
-   
-
 </div>
 </template>
 
@@ -64,11 +68,15 @@ export default {
     name: 'report',
     data(){
         return{
+
             reportFilterData: {
                 'dateFrom' : '',
                 'dateTo' : '',
                 'filter' : ''
             },
+
+            isFormVisible: false,
+
           
             reportData: [],
 
@@ -90,6 +98,7 @@ export default {
             ReportService.getReport(this.reportFilterData, this.$store.state.user.id).then((r) => {
                 if(r.status == 200) {
                     this.reportData = r.data;
+                    this.isFormVisible = !this.isFormVisible
                 }
                 else{
                     console.log(r.status)
@@ -97,6 +106,9 @@ export default {
 
             })
         },
+
+
+     
         downloadCSV(csv, filename) {
     let csvFile;
     let downloadLink;
@@ -149,21 +161,18 @@ export default {
 
     #report-header {
         text-align: center;
-        margin: 0.75em 0 0.75em 0;
+        margin: 0.4em 0 0.75em 0;
     }
     .report {
         border-collapse: collapse;
         width: 100%;
     }
 
-     
-
-   
     .report-form {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        margin: 20px;
+        margin: 2em 20px 2em 20px;
         align-items : flex-end;
         
     }
@@ -171,13 +180,17 @@ export default {
     #report {
         width: 100%;
         margin-bottom: 30px;
+        border-radius: 30px;
+        border-collapse: collapse;
+        overflow: hidden;
     }
     
-    #submit-report {
+   
+    #submit-report #export-report {
         padding: 0.7em;
-         width: 8em;
+        width: 8em;
+
     }
-    
     #report tr:nth-child(even){
         background-color: #385a6421;
     }
@@ -201,5 +214,11 @@ export default {
         text-align: center;
         padding: 1em 0;
     }
+    .report .details {
+        margin: 0.5em 0 1em 0;
+        /* text-align: left;
+        margin-left: 5em; */
+    }
+
 
 </style>

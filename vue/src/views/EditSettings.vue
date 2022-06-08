@@ -147,4 +147,5 @@ export default {
     .blood-sugar-range input {
         margin-right: 10px;
     }
+
 </style>

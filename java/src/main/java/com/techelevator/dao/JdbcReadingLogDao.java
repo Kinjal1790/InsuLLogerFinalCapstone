@@ -104,6 +104,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         alertInfodto.setBolus(bolus);
         alertInfodto.setWarning(warning);
         alertInfodto.setAlert(alert);
+        alertInfodto.setTargetMin(targetMin);
+        alertInfodto.setTargetMax(targetMax);
 
         return alertInfodto;
     }
@@ -134,7 +136,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
                 " from reading_log as r " +
                 " inner join bolus_log as b " +
                 " on r.reading_log_id = b.reading_log_id " +
-                " where r.user_id = ?;";
+                " where r.user_id = ? " +
+                " order by r.date_and_time desc; ";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         while (results.next()) {
@@ -152,7 +155,8 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         String sql = "SELECT r.date_and_time, r.user_id, r.carb_intake, r.blood_sugar_reading, b.bolus_dose, r.warning, r.alert " +
                 " from reading_log as r " +
                 " inner join bolus_log as b " +
-                " on r.reading_log_id = b.reading_log_id; ";
+                " on r.reading_log_id = b.reading_log_id " +
+                " order by r.date_and_time desc; ";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -182,6 +186,28 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
             activityLogDto.setAlert(results.getString("alert"));
         return activityLogDto;
     }
+
+
+//    @Override
+//    public List<ActivityDTO> getUserActivityLogById(int id) {
+//
+//        List<ActivityDTO> UserActivityLogs = new ArrayList<>();
+//
+//        String sql = "SELECT r.date_and_time, r.user_id, r.carb_intake, r.blood_sugar_reading, b.bolus_dose, r.warning, r.alert " +
+//                " from reading_log as r " +
+//                " inner join bolus_log as b " +
+//                " on r.reading_log_id = b.reading_log_id " +
+//                " where r.user_id = ? " +
+//                " order by r.date_and_time desc; ";
+//
+//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+//        while (results.next()) {
+//            ActivityDTO activityLog = activityLogMap(results);
+//            UserActivityLogs.add(activityLog);
+//        }
+//        return UserActivityLogs;
+//    }
+
 
 
 //    @Override

@@ -4,6 +4,7 @@
       <img src="../style/carbs.jpg" alt="a woman measuring her blood sugar level">
     </div>
       <form class="bolus-form"  @submit.prevent='getBolus'>
+          <h2>Please provide this information to generate your bolus:</h2>
           <label for="carb-intake">Carbs Intake (g):</label>
           <input v-model='readings.carbIntake' id='carb-intake' type="number" step="0.01">
           <label for="bl-sugar-reading">Blood Sugar Level (mg/dL):</label>
@@ -28,10 +29,10 @@
 
           <b-modal id="bv-modal-alert" size='lg' centered >
               <template #modal-header="{ }">
-                    <h3>Alert</h3>
+                    <h2 class='message-title'>Alert</h2>
             </template>
               <div class="d-block text-center">
-                  <h3>{{alert == "high" ? 'Your blood sugar is higher than your target!' : 'Your blood sugar is lower than your target!'}}</h3>
+                  <h3>{{alert == "high" ? `Your blood sugar is higher than your target maximum (${targetMax}) !` : `Your blood sugar is lower than your target minimum (${targetMin}) !`}}</h3>
                   <h2>{{bolus > 0 ? `Recommended bolus: ${bolus}` : ""}}</h2>
               </div>
               <template #modal-footer="{ ok }">
@@ -43,12 +44,12 @@
 
           <b-modal id="bv-modal-warning" size='lg' centered >
               <template #modal-header="{ }">
-                    <h3>Alert</h3>
+                    <h2 class='message-title'>Warning</h2>
             </template>
               <div class="d-block text-center">
                   <h3>{{warning == "high" ?
-                       'Your blood sugar is dangerously high! If you experience blurred vision, extreme thirst, vomiting consider calling 911!' :
-                        'Your blood sugar is dangerously low! If you experience dizziness, shakiness, vomiting consider calling 911!'}}</h3>
+                       'Your blood sugar is dangerously high (300 or above)! If you experience blurred vision, extreme thirst, vomiting consider calling 911!' :
+                        'Your blood sugar is dangerously low (65 or below)! If you experience dizziness, shakiness, vomiting consider calling 911!'}}</h3>
                         <h2>{{bolus > 0 ? `Recommended bolus: ${bolus}` : ""}}</h2>
               </div>
               <template #modal-footer="{ ok }">
@@ -78,12 +79,18 @@ export default {
             },
             bolus: '',
             warning: '',
-            alert: ''
+            alert: '',
+            targetMin: '',
+            targetMax: ''
         }
     },
    
     methods: {
-        
+        resetForm() {
+            this.readings.bloodSugarReading = "";
+            this.readings.carbIntake = "";
+            
+        },
         getBolus() {
             let today = new Date();
             let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -97,9 +104,12 @@ export default {
                     this.bolus = r.data.bolus.toFixed(1);
                     this.alert = r.data.alert;
                     this.warning = r.data.warning;
+                    this.targetMin = r.data.targetMin;
+                    this.targetMax = r.data.targetMax;
                     console.log(r.data)
                     console.log(this.alert, r.data.warning, this.bolus)
                     this.chooseModal()
+                    this.resetForm()
                 }
                 else {
                     console.log(r.status)
@@ -144,5 +154,19 @@ export default {
     .side-img img {
         width: 35vw;
     }
+    .bolus-form input {
+        border: 1px solid #558999;
+        border-radius: 5px;
+        padding: 0.3em;
+    }
+    .bolus-form input:focus {
+        border: 1px solid pink;
+        border-radius: 5px;
+        padding: 0.3em;
+    }
+    .message-title {
+        color: #fd7459;
+    }
+    
     
 </style>

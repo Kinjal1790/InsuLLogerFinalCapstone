@@ -33,12 +33,20 @@ export default new Vuex.Store({
                 carbInsulinRatio: ''
     },
     initialSubmission: false,
+
+    activityHistoryAllUsers: []
+
   },
   mutations: {
     SET_PROFILE_SETTINGS(state, profileSettings) {
       state.profileSettings = profileSettings;
       localStorage.setItem('settings', JSON.stringify(profileSettings))
     },
+
+    ALL_ACTIVITY_HISTORY(state, activityHistoryAllUsers){
+      state.activityHistoryAllUsers = activityHistoryAllUsers;
+    },
+
     // SET_INITIAL_SUBMISSION(state) {
     //   state.initialSubmission = true;
     //   localStorage.setItem('init_sub', true);
