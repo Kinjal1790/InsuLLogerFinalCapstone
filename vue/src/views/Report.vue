@@ -15,16 +15,20 @@
 
     <div class="filter">
         <label for="filter">Filter :</label>
-          <b-form-select id='filter' class= "formItems form-select" :options='filterOptions' v-model='reportFilterData.filter'></b-form-select>
+        <b-form-select id='filter' class= "formItems form-select" :options='filterOptions' v-model='reportFilterData.filter'></b-form-select>
     </div>
 
     <div>
         <button id="submit-report" type="submit">Report</button>
     </div>
+
+    <div>
+        <button v-show="isFormVisible" id="export-report" v-on:click="exportTableToCSV('report.csv')">Export</button>
+    </div>
+    
     </b-form>
 
-  
-    <div>
+    <div v-show="isFormVisible">
         <h1 id='report-header'>Report</h1>
         <table id='report'>
                 <thead>
@@ -46,15 +50,10 @@
                     <td class="name">{{ row.bolusDose.toFixed(1) + " unit(s)" }}</td>
                     <td class="name">{{ row.targetMin + " (mg/dL)" }}</td>
                     <td class="name">{{ row.targetMax + " (mg/dL)" }}</td>
-
-                    
                 </tr>
             </tbody>
-        </table>
-        <button v-on:click="exportTableToCSV('report.csv')">Export</button>
+        </table>   
     </div>
-   
-
 </div>
 </template>
 
@@ -64,11 +63,15 @@ export default {
     name: 'report',
     data(){
         return{
+
             reportFilterData: {
                 'dateFrom' : '',
                 'dateTo' : '',
                 'filter' : ''
             },
+
+            isFormVisible: false,
+
           
             reportData: [],
 
@@ -90,6 +93,7 @@ export default {
             ReportService.getReport(this.reportFilterData, this.$store.state.user.id).then((r) => {
                 if(r.status == 200) {
                     this.reportData = r.data;
+                    this.isFormVisible = !this.isFormVisible
                 }
                 else{
                     console.log(r.status)
@@ -97,6 +101,9 @@ export default {
 
             })
         },
+
+
+     
         downloadCSV(csv, filename) {
     let csvFile;
     let downloadLink;
@@ -156,9 +163,6 @@ export default {
         width: 100%;
     }
 
-     
-
-   
     .report-form {
         display: flex;
         flex-direction: row;
@@ -173,10 +177,14 @@ export default {
         margin-bottom: 30px;
     }
     
-    #submit-report {
+   
+    #submit-report #export-report {
         padding: 0.7em;
-         width: 8em;
+        width: 8em;
+
     }
+
+    
     
     #report tr:nth-child(even){
         background-color: #385a6421;

@@ -31,7 +31,7 @@
                     <h3>Alert</h3>
             </template>
               <div class="d-block text-center">
-                  <h3>{{alert == "high" ? 'Your blood sugar is higher than your target!' : 'Your blood sugar is lower than your target!'}}</h3>
+                  <h3>{{alert == "high" ? `Your blood sugar is higher than your target maximum (${targetMax}) !` : `Your blood sugar is lower than your target minimum (${targetMin}) !`}}</h3>
                   <h2>{{bolus > 0 ? `Recommended bolus: ${bolus}` : ""}}</h2>
               </div>
               <template #modal-footer="{ ok }">
@@ -43,12 +43,12 @@
 
           <b-modal id="bv-modal-warning" size='lg' centered >
               <template #modal-header="{ }">
-                    <h3>Alert</h3>
+                    <h3>Warning</h3>
             </template>
               <div class="d-block text-center">
                   <h3>{{warning == "high" ?
-                       'Your blood sugar is dangerously high! If you experience blurred vision, extreme thirst, vomiting consider calling 911!' :
-                        'Your blood sugar is dangerously low! If you experience dizziness, shakiness, vomiting consider calling 911!'}}</h3>
+                       'Your blood sugar is dangerously high (300 or above)! If you experience blurred vision, extreme thirst, vomiting consider calling 911!' :
+                        'Your blood sugar is dangerously low (65 or below)! If you experience dizziness, shakiness, vomiting consider calling 911!'}}</h3>
                         <h2>{{bolus > 0 ? `Recommended bolus: ${bolus}` : ""}}</h2>
               </div>
               <template #modal-footer="{ ok }">
@@ -78,7 +78,9 @@ export default {
             },
             bolus: '',
             warning: '',
-            alert: ''
+            alert: '',
+            targetMin: '',
+            targetMax: ''
         }
     },
    
@@ -97,6 +99,8 @@ export default {
                     this.bolus = r.data.bolus.toFixed(1);
                     this.alert = r.data.alert;
                     this.warning = r.data.warning;
+                    this.targetMin = r.data.targetMin;
+                    this.targetMax = r.data.targetMax;
                     console.log(r.data)
                     console.log(this.alert, r.data.warning, this.bolus)
                     this.chooseModal()
