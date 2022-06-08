@@ -51,16 +51,17 @@
 
   }
   .form-signin, .form-register, .settings-form {
-      /* display: flex;
+      display: flex;
       flex-direction: column;
-     
-      
-      align-items: flex-start; */
-      /* display: grid;
-      grid-template-columns: 1fr 3fr; */
+      align-items: flex-start;
   }
   .form-signin > *, .form-register > *, .settings-form > * {
-    margin: 0.7em;
+    margin: 0.7em auto;
+    
+  }
+  .form-signin label, .form-register label, .settings-form label {
+    margin: 0.7em 1.3em;
+    
   }
   .form-signin input, .form-register input, .settings-form #sex, .settings-form #insulin-strength, .settings-form input{
       width: 94%
@@ -121,8 +122,6 @@
       display: grid;
       grid-template-columns: 1fr;
     }
-    /* .home {
-      margin-top: -3em;
-    } */
+    
   }
   

@@ -15,6 +15,8 @@ Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 
 axios.defaults.baseURL = process.env.VUE_APP_REMOTE_API;
+// axios.defaults.headers.common['x-api-key'] = process.env.VUE_APP_FOOD_KEY
+
 
 Vue.config.productionTip = false
 Vue.filter('formatDate', function(value) {

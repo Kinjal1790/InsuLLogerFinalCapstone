@@ -11,6 +11,7 @@ import store from '../store/index'
 import Report from '../views/Report.vue'
 import ActivityHistory from '../views/ActivityHistory.vue'
 import AdminReport from '../views/AdminReport.vue'
+import FoodGenerator from '../views/FoodGenerator.vue'
 import About from '../views/About.vue'
 
 Vue.use(Router)
@@ -120,6 +121,14 @@ const router = new Router({
         }
 
     },
+    {
+      path: "/:carbs/food",
+      name: "food",
+      component: FoodGenerator,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 
