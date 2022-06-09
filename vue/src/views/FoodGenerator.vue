@@ -58,7 +58,10 @@ export default {
                             for(let i = 0; i < response.data.ingredients.length; i++) {
                                 this.food.ingredients.push(response.data.ingredients[i])
                             }
-                            this.hasData = !this.hasData
+                            if (this.hasData == true) {
+                                this.hasData = !this.hasData
+                            }
+                            
                             return this.food
             })
     },

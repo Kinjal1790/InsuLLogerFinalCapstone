@@ -21,7 +21,7 @@
             <router-link v-bind:to="{name:'report'}" v-if="$store.state.token != ''  && $store.state.user.authorities[0].name != 'ROLE_ADMIN'">Report</router-link>
             <!-- <router-link v-bind:to='{name: "profile_settings"}'  v-if="$store.state.token != '' && !$store.state.profileSettings.userId">Profile Settings</router-link> -->
             <router-link v-bind:to="{name: 'edit_settings', params: {id: $store.state.user.id}}"  v-if="$store.state.token != '' && $store.state.user.authorities[0].name != 'ROLE_ADMIN'">Profile Settings</router-link>
-            <router-link v-bind:to="{ name: 'food', params: {carbs: $store.state.carbsForRecipe} }" v-if="$store.state.token != ''">Recipes</router-link>
+            <router-link v-bind:to="{ name: 'food', params: {carbs: $store.state.carbsForRecipe} }" v-if="$store.state.token != '' && $store.state.user.authorities[0].name != 'ROLE_ADMIN'">Recipes</router-link>
             <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Log Out</router-link>
       </nav> 
       <a href="javascript:void(0);" class="icon" @click="toggleDropDown()">

@@ -154,7 +154,8 @@ export default {
 <style>
     #activity-header {
         text-align: center;
-        margin: 0.75em 0 1em 0;
+        /* margin: 0.75em 0 1em 0; */
+        margin: 0.75em auto 1em auto;
     }
     #activity {
         border-collapse: collapse;
