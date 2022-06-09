@@ -139,8 +139,9 @@ export default {
     }
     .food-wrapper {
         background-image: url("../style/recipe.jpg");
-        background-position-y: 450%;
-        background-size: 100% auto;
+        background-position-y: 150px;
+        background-position-x: 150px;
+        background-size: 80% auto;
         background-repeat: no-repeat;
         height: 100vh;
     }

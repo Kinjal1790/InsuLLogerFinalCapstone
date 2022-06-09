@@ -9,14 +9,14 @@ INSERT INTO users (firstName, lastName, email, password_hash,role) VALUES ('Rike
 INSERT INTO users (firstName, lastName, email, password_hash,role) VALUES ('Leja','Ayala', 'leja.ayala@gmail.com', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (firstName, lastName, email, password_hash,role) VALUES ('Kasper','Chambers', 'eric@gmail.com', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (3,'1997-12-05','male', 143,'novolog', 100, 70, 150, 4.5, 35, 10);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (4,'1987-01-22','female', 124,'humalog', 100, 80, 160, 5, 35, 11);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (5,'1967-01-27','female', 150,'novolog', 100, 75, 170, 6, 45, 12);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (6,'1986-12-10','male', 180,'novolog', 100, 85, 180, 4.5, 45, 10);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (7,'1976-11-10','female', 110,'humalog', 100, 80, 150, 5, 50, 11);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (8,'1985-03-19','male', 146,'novolog', 100, 75, 160, 6, 35, 12);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (9,'1995-09-12','female', 149,'humalog', 100, 79, 170, 5.5, 45, 10);
-INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (10,'1965-06-07','male', 150,'novolog', 100, 80, 180, 4.5, 50, 11);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (3,'1997-12-05','male', 143,'novolog', 'u-100', 70, 150, 4.5, 35, 10);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (4,'1987-01-22','female', 124,'humalog', 'u-100', 80, 160, 5, 35, 11);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (5,'1967-01-27','female', 150,'novolog', 'u-100', 75, 170, 6, 45, 12);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (6,'1986-12-10','male', 180,'novolog', 'u-100', 85, 180, 4.5, 45, 10);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (7,'1976-11-10','female', 110,'humalog', 'u-100', 80, 150, 5, 50, 11);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (8,'1985-03-19','male', 146,'novolog', 'u-100', 75, 160, 6, 35, 12);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (9,'1995-09-12','female', 149,'humalog', 'u-100', 79, 170, 5.5, 45, 10);
+INSERT INTO user_info (user_id, yob, sex, weight, bolus_insulin_name, insulin_strength, target_min, target_max, basal_rate, sensitivity, carb_insulin_ratio) VALUES (10,'1965-06-07','male', 150,'novolog', 'u-100', 80, 180, 4.5, 50, 11);
 
 INSERT INTO reading_log (user_id, carb_intake, blood_sugar_reading, date_and_time, warning, alert) VALUES (3, 55, 140, '2022-05-01 09:00:00','','');
 INSERT INTO reading_log (user_id, carb_intake, blood_sugar_reading, date_and_time, warning, alert) VALUES (3, 65, 120, '2022-05-01 12:00:00','','');
