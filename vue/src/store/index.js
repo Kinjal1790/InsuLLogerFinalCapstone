@@ -33,7 +33,7 @@ export default new Vuex.Store({
                 carbInsulinRatio: ''
     },
     initialSubmission: false,
-
+    carbsForRecipe: '20',
     activityHistoryAllUsers: []
 
   },

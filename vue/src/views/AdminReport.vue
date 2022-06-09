@@ -170,7 +170,7 @@ export default {
         text-align: center;
     }
     th {
-        background-color: #fd7459;
+        background-color: #385a64;
         color: white;
         text-align: center;
         padding: 1em 0;
