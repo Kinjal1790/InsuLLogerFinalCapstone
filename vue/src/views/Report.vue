@@ -171,9 +171,9 @@ export default {
     }
     .report-background {
         background-image: url('../style/report-iimg.jpg');
-        background-size: 70% auto;
+        background-size: 50% auto;
         background-repeat: no-repeat;
-        background-position-y: 350%;
+        background-position-y: 250px;
         background-position-x: 35%;
     }
 
