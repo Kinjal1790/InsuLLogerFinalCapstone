@@ -1,5 +1,5 @@
 <template>
-  <div class="food-wrapper">
+  <div :class="{'food-wrapper': hasData}">
       <h1>Recipe Generator</h1>
     <div class='food-section'>
         
@@ -8,13 +8,13 @@
             <input v-model='carbs' id='carb-amount' type="number" step="0">
         </form>
         <button id="generate-recipe-btn" v-on:click="getFood">Generate</button>
-        <h2 class='recipe-title'>{{food.name}}</h2>
-        <img class='food-img' v-bind:src="food.image">
+        <h2 class='recipe-title' v-if="food.instructions != ''">{{food.name}}</h2>
+        <img class='food-img' v-bind:src="food.image" v-if="food.instructions != ''">
         <h3 class='food-header' v-if="food.instructions != ''" >Recipe Info</h3>
-        <p v-html="food.summary"></p>
+        <p v-html="food.summary" v-if="food.instructions != ''"></p>
         <h3 class='food-header' v-if="food.instructions != ''" >Ingredients</h3>
 
-        <b-list-group v-for="ingredient in food.ingredients" v-bind:key="ingredient" >
+        <b-list-group v-for="ingredient in food.ingredients" v-bind:key="ingredient"  >
             <b-list-group-item>{{ingredient}}</b-list-group-item>
         </b-list-group>
         <h3 class='food-header' v-if="food.instructions != ''">Instructions</h3>
@@ -41,8 +41,8 @@ export default {
                 instructions: '',
                 ingredients: []
             },
-            carbs : 0
-            
+            carbs : 0,
+            hasData: true
 
         }
       
@@ -58,6 +58,7 @@ export default {
                             for(let i = 0; i < response.data.ingredients.length; i++) {
                                 this.food.ingredients.push(response.data.ingredients[i])
                             }
+                            this.hasData = !this.hasData
                             return this.food
             })
     },
@@ -108,7 +109,7 @@ export default {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.295);
     }
     .list-group {
         width: 40%;
@@ -135,7 +136,7 @@ export default {
     }
     .food-wrapper {
         background-image: url("../style/recipe.jpg");
-        background-position-y: 250%;
+        background-position-y: 450%;
         background-size: 100% auto;
         background-repeat: no-repeat;
         height: 100vh;
