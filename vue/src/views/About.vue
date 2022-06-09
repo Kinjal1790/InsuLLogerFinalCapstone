@@ -32,6 +32,14 @@
             <img id="facebook" src="../style/facebook.jpg" alt="facebook logo"> 
             <img id="instagram" src="../style/instagram.jpg" alt="instagram logo"> 
             <img id="twitter" src="../style/twitter.jpg" alt="twitter log">
+       
+     
+      </div>
+      <div class="contact-info">
+      <h6> Contact Us:</h6>
+       <p>insulogger@gmail.com</p>
+        <p>321 Main St, Appleton WI 54914</p> 
+        <p>1-(920)-456-9876</p>
       </div>
     </div>
     
@@ -50,6 +58,11 @@ export default {
 </script>
 
 <style scoped>
+
+.contact-info {
+  padding: 60px;
+ text-align: center;
+}
 
 div {
     display: flex;
@@ -75,6 +88,7 @@ div {
     padding-top: 5em;
     display: grid;
     grid-template-columns: 50% 50%;
+ 
   }
   .about-info {
     display: flex;
@@ -87,13 +101,14 @@ div {
   }
   .side-img {
     margin: 0 auto;
-    position: sticky;
+    
 
   }
   .side-img img {
     width: 35vw;
   }
   .socials-header {
+    padding: 20px;
       text-align: center;
   }
 </style>
