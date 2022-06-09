@@ -1,5 +1,5 @@
 <template>
-<div class="report">
+<div :class="{'report-background': !isFormVisible}" id='report-section'>
     <h1 id='report-header'>Report</h1>
     <div class="details">
         <p>Select the days that you would like to view reports for using the drop-down calender. <br>
@@ -76,7 +76,7 @@ export default {
             },
 
             isFormVisible: false,
-
+            
           
             reportData: [],
 
@@ -163,9 +163,18 @@ export default {
         text-align: center;
         margin: 0.4em 0 0.75em 0;
     }
-    .report {
+    #report-section {
         border-collapse: collapse;
         width: 100%;
+        min-height: 100vh;
+        
+    }
+    .report-background {
+        background-image: url('../style/report-iimg.jpg');
+        background-size: 70% auto;
+        background-repeat: no-repeat;
+        background-position-y: 350%;
+        background-position-x: 35%;
     }
 
     .report-form {
@@ -214,7 +223,7 @@ export default {
         text-align: center;
         padding: 1em 0;
     }
-    .report .details {
+    #report-section .details {
         margin: 0.5em 0 1em 0;
         /* text-align: left;
         margin-left: 5em; */
