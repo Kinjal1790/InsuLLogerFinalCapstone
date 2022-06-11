@@ -78,7 +78,7 @@ public class AuthenticationController {
 
     }
 
-   // @EventListener(ApplicationReadyEvent.class)
+
     public void triggerMail(String toEmail) throws MessagingException {
         senderService.sendSimpleEmail(toEmail,
                 "Thank you for creating an InsuLogger account",

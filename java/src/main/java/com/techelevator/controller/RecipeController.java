@@ -29,11 +29,6 @@ public class RecipeController {
         return recipeService.getFoodInfo(list.get(b));
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(value = "/test1", method = RequestMethod.GET)
-//    public FoodDTO test1() {
-//        int id = 645092;
-//        return recipeService.getFoodInfo(id);
-//    }
+
 
 }

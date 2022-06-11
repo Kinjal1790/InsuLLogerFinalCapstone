@@ -43,11 +43,5 @@ public class ReadingLogController {
         return readingLogDao.getAllUserActivityLog();
     }
 
-//    @PreAuthorize("hasAnyRole('ADMIN')")
-//    @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(path="/{id}/activity", method = RequestMethod.GET)
-//    public List<ActivityDTO> getUserActivitybyId(@PathVariable int id) { return readingLogDao.getUserActivityLogById(id); }
-
-
 
 }

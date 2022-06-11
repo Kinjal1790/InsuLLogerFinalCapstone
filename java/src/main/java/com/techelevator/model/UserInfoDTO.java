@@ -45,13 +45,6 @@ public class UserInfoDTO {
     }
 
 
-//    public int getUserInfoId() {
-//        return userInfoId;
-//    }
-//
-//    public void setUserInfoId(int userInfoId) {
-//        this.userInfoId = userInfoId;
-//    }
 
     public int getUserId() {
         return userId;
@@ -61,12 +54,6 @@ public class UserInfoDTO {
         this.userId = userId;
     }
 
-//    public String getYob() {
-//        return yob;
-//    }
-//    public void setYob(String yob) {
-//        this.yob = yob;
-//    }
 
     public String getSex() {
         return sex;

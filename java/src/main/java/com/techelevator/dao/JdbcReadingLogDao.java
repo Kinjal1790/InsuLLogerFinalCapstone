@@ -119,9 +119,7 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
         }
 
         String sql = "Insert into bolus_log (reading_log_id, bolus_dose) values (?,?);";
-
         jdbcTemplate.update(sql, readingLogId, bolus);
-
         return bolus;
 
     }
@@ -188,63 +186,5 @@ public class JdbcReadingLogDao implements ReadingLogDAO{
     }
 
 
-//    @Override
-//    public List<ActivityDTO> getUserActivityLogById(int id) {
-//
-//        List<ActivityDTO> UserActivityLogs = new ArrayList<>();
-//
-//        String sql = "SELECT r.date_and_time, r.user_id, r.carb_intake, r.blood_sugar_reading, b.bolus_dose, r.warning, r.alert " +
-//                " from reading_log as r " +
-//                " inner join bolus_log as b " +
-//                " on r.reading_log_id = b.reading_log_id " +
-//                " where r.user_id = ? " +
-//                " order by r.date_and_time desc; ";
-//
-//        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
-//        while (results.next()) {
-//            ActivityDTO activityLog = activityLogMap(results);
-//            UserActivityLogs.add(activityLog);
-//        }
-//        return UserActivityLogs;
-//    }
-
-
-
-//    @Override
-//    public List<ReadingLogDTO> getAllReadingLogs(int id) {
-//        List<ReadingLogDTO> readingLogs = new ArrayList<>();
-//
-////        String sql = "SELECT user_id, carb_intake, blood_sugar_reading, date_and_time, warning, alert " +
-////                     "FROM reading_log WHERE user_id = ?";
-//
-//
-//        String sql = "SELECT r.date_and_time, r.user_id, r.carb_intake, r.blood_sugar_reading, b.bolus_dose, r.warning, r.alert\n" +
-//                "from reading_log as r\n" +
-//                "inner join bolus_log as b\n" +
-//                "on r.reading_log_id = b.reading_log_id\n" +
-//                "where r.user_id = ?;";
-//
-//        SqlRowSet results = this.jdbcTemplate.queryForRowSet(sql, id);
-//        while (results.next()) {
-//            ReadingLogDTO readingLog = readingLogMap(results);
-//            readingLogs.add(readingLog);
-//        }
-//        return readingLogs;
-//    }
-//
-//
-//    private ReadingLogDTO readingLogMap(SqlRowSet results) {
-//
-//        ReadingLogDTO readingLogDTO = new ReadingLogDTO();
-//        readingLogDTO.setUserId(results.getInt("user_id"));
-//        readingLogDTO.setCarbIntake(results.getDouble("carb_intake"));
-//        readingLogDTO.setBloodSugarReading(results.getInt("blood_sugar_reading"));
-////      readingLogDTO.setDataAndTime(results.getString("date_and_time"));
-//        readingLogDTO.setDataAndTime(results.getTimestamp("date_and_time").toString());
-//        readingLogDTO.setWarning(results.getString("warning"));
-//        readingLogDTO.setAlert(results.getString("alert"));
-//
-//        return readingLogDTO;
-//    }
 
 }
